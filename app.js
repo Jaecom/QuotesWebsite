@@ -22,8 +22,7 @@ app.set("view engine", "ejs")
 app.use(express.static('public'))
 
 app.get("/", async (req, res) => {
-    const quotes = await Quote.find({});
-    console.log(quotes);
+    const quotes = await Quote.aggregate([{$sample: {size: 8}}])
     res.render("quotes/index", { quotes });
 });
 
