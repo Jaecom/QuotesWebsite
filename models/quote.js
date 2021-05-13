@@ -2,7 +2,11 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const quoteSchema = new Schema({
-    quote: {
+    quoteFull: {
+        type: String,
+        required: true
+    },
+    quoteShort: {
         type: String,
         required: true
     },
