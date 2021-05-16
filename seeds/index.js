@@ -30,7 +30,6 @@ const clearAndInputSeedData = async () => {
             genre: quote.genre
         });
         await result.save();
-        console.log(result.quoteFull, result.quoteShort)
     };
 
 }
@@ -45,7 +44,6 @@ const getShortQuote = (quote) => {
     const startMarkerIndex = quote.indexOf("<") + 1;
     const endMarkerIndex = quote.indexOf(">");
     const shortQuote = quote.slice(startMarkerIndex, endMarkerIndex);
-
     return shortQuote;
 }
 

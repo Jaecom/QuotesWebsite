@@ -1,11 +1,11 @@
 body {
     font-family: "Open Sans", sans-serif;
-    color: #484848;
+    color: #474747;
 }
 
 .title {
     margin-top: 5rem;
-    font-family: "Fanwood Text";
+    font-family: "Lora";
     text-align: center;
     font-size: 35px;
 }
@@ -22,36 +22,35 @@ body {
 .quote-container {
     display: flex;
     flex-direction: column;
-    text-align: center;
+    /* text-align: center; */
     justify-content: center;
 
-    font-family: "Fanwood Text";
+    font-family: "Lora";
     
-    width: 40%;
+    width: 45%;
     margin: auto;
     padding: 30px 60px;
-    transition: box-shadow 0.4s ease-out ;
-
+    transition: all 0.7s ease-out;
 }
 
 .quote-container:hover {
     box-shadow: 0 3px 8px rgba(44, 44, 44, 0.35);
-    transition: box-shadow 0.4s ease-out;
+    background-color: #ffe5d9;
     cursor: pointer;
 }
 
-.startDoubleQuote {
+.start-double-quote {
     font-size: 1.5em;
-    margin-bottom: 10px;
+    margin-bottom: -10px;
 }
 
 .quote {
-    font-size: 1.0em;
-    line-height: 2.5em;
+    font-size: 0.8em;
+    line-height: 3.0em;
     /* font-style: italic; */
 }
 
-.quoteAuthor {
+.quote-author {
     font-family: "Open Sans";
     font-weight: bold;
     font-size: 0.6em;
@@ -63,28 +62,57 @@ body {
 }
 
 hr {
-    width: 10%;
-    margin: 100px auto;
+    width: 30%;
+    margin-top: 100px;
+    margin-bottom: 100px;
 }
 
-.quoteTitle {
-    opacity: 1;
-    transition: opacity 0.8s ease-out;
-}
-
-.quoteTitleHide {
+.quote-hide {
     display: none;
 }
 
-.quoteTitleVisuallyHidden {
-    opacity: 0;
-    transition: opacity 0.8s ease-out;
+.quote-full {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.8s ease-out;
+}
+
+.quote-short {
+    max-height: 0;
+    overflow: hidden;
+}
+
+.enlarge {
+    max-height: 1000px;
+    transition: max-height 1.3s ease-out;
+}
+
+.quote-view-more {
+    font-family: "Open Sans";
+    font-size: 0.6em;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.1em;
+    margin-top: 30px;
+    
+    text-decoration: underline;
+    color: inherit;
+}
+
+.quote-view-more:hover {
+    color:#cddafd;
+    cursor: pointer;
+}
+
+.focus {
+    box-shadow: 0 3px 8px rgba(44, 44, 44, 0.35);
+    background-color: #ffe5d9;
 }
 
 @media (max-width: 1000px) {
     .quote-container {
         width: 70%;
-        font-size: 1.15rem;
+        font-size: 1.3rem;
     }
-    
 }
