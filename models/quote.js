@@ -13,7 +13,7 @@ const quoteSchema = new Schema({
     author: {
         type: String,
         required: true
-    }, 
+    },
     title: {
         type: String,
         required: true
@@ -23,5 +23,9 @@ const quoteSchema = new Schema({
         require: true
     },
 })
+
+quoteSchema.virtual('partiallyBoldedQuote').get(function () {
+    return this.quoteFull.replace(this.quoteShort, `<b>${this.quoteShort}</b>`);
+});
 
 module.exports = mongoose.model("Quote", quoteSchema);

@@ -1,15 +1,22 @@
 <% layout("layouts/boilerplate") -%>
-<link rel="stylesheet" href="stylesheets/index.css">
 
-<h1 class="title">Quotes</h1>
+<div style="height: 100vh;">
+    <h1>Hello</h1>
+</div>
+
+<h2 class="title">Quotes</h1>
 
 <div style="display: flex; justify-content: center;">
     <div class="container">
         <% quotes.forEach((quote, index) => { %>
-            <div class="quote-container" id="quoteContainer<%= index %>">
-                <p class="startDoubleQuote">&#8220;</p>
-                <p class="quote"><%= quote.quoteShort %></p>
-                <p class="quoteAuthor"><%= quote.author %><span id="quoteTitle<%= index %>" class="quoteTitle quoteTitleHide quoteTitleVisuallyHidden">, <%= quote.title %> </span></p>
+            <div class="quote-container">
+                <p class="start-double-quote">&#8220;</p>
+                <p class="quote quote-short enlarge"><%= quote.quoteShort %></p>
+                <p class="quote quote-hide quote-full"><%- quote.partiallyBoldedQuote %> </p>
+                <p class="quote-author">
+                    <%= quote.author %><span class="quote-title quote-hide">, <%= quote.title %> </span>
+                </p>
+                <a href="/<%= quote._id %> " class="quote-view-more">Learn More</a>
             </div>
             <hr>
         <% }) %>  
