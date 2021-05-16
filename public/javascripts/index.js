@@ -2,6 +2,27 @@ const quoteContainers = document.querySelectorAll(".quote-container");
 const quoteTitleSpans = document.querySelectorAll(".quote-title");
 const quoteFullContainers = document.querySelectorAll(".quote-full");
 const quoteShortContainers = document.querySelectorAll(".quote-short");
+const quoteViewAnchors = document.querySelectorAll(".quote-view-more");
+
+highlightFirstElement();
+
+window.addEventListener("scroll", () => {
+    for (quoteContainer of quoteContainers) {
+        if (isScrolledIntoView(quoteContainer)) {
+            quoteContainer.classList.add("focus")
+        } else {
+            quoteContainer.classList.remove("focus")
+        }
+    }
+});
+
+
+for(quoteViewAnchor of quoteViewAnchors) {
+    quoteViewAnchor.addEventListener("click", (event) => {
+        event.stopPropagation();
+    })
+}
+
 quoteContainers.forEach((expandButton, index) => {
     let clickToExpand = true;
     const quoteFull = quoteFullContainers[index];
@@ -38,3 +59,19 @@ quoteContainers.forEach((expandButton, index) => {
     })
 });
 
+
+function isScrolledIntoView(el) {
+    const rect = el.getBoundingClientRect();
+    const elemTop = rect.top;
+    const elemBottom = rect.bottom;
+    const windowMid = window.innerHeight / 2;
+
+    // When top and bottom is between midpoint in screen returns true
+    const isVisible = (elemTop <= windowMid && elemBottom >= windowMid);
+    return isVisible;
+}
+
+
+function highlightFirstElement() {
+    quoteContainers[0].classList.add("focus");
+}
