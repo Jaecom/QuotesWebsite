@@ -1,17 +1,25 @@
-const quoteContainers = document.querySelectorAll(".quote-container");
-const quoteTitleSpans = document.querySelectorAll(".quote-title");
-const quoteFullContainers = document.querySelectorAll(".quote-full");
-const quoteShortContainers = document.querySelectorAll(".quote-short");
-const quoteViewAnchors = document.querySelectorAll(".quote-view-more");
-
-highlightFirstElement();
+const quoteContainers = document.querySelectorAll(".quote");
+const quoteTitleSpans = document.querySelectorAll(".quote__title");
+const quoteFullContainers = document.querySelectorAll(".quote__full");
+const quoteShortContainers = document.querySelectorAll(".quote__short");
+const quoteViewAnchors = document.querySelectorAll(".quote__pagelink");
 
 window.addEventListener("scroll", () => {
     for (quoteContainer of quoteContainers) {
-        if (isScrolledIntoView(quoteContainer)) {
-            quoteContainer.classList.add("focus")
+
+        const previousEl = quoteContainer.previousElementSibling
+        const nextEl = quoteContainer.nextElementSibling
+
+        if (isScrolledIntoView(quoteContainer)) {    
+            previousEl.classList.add("break-is-focus")
+            nextEl.classList.add("break-is-focus")
+            quoteContainer.classList.add("is-focus")
         } else {
-            quoteContainer.classList.remove("focus")
+            if(quoteContainer.classList.contains("is-focus")) {
+                previousEl.classList.remove("break-is-focus")
+                nextEl.classList.remove("break-is-focus")
+                quoteContainer.classList.remove("is-focus")
+            }
         }
     }
 });
@@ -35,23 +43,23 @@ quoteContainers.forEach((expandButton, index) => {
         if (clickToExpand) {
             //expanding
             clickToExpand = false;
-            quoteFull.classList.remove("quote-hide");
-            quoteShort.classList.add("quote-hide");
-            quoteShort.classList.remove("enlarge");
-            titleSpan.classList.remove("quote-hide");
+            quoteFull.classList.remove("is-hidden");
+            quoteShort.classList.add("is-hidden");
+            quoteShort.classList.remove("is-expanded");
+            titleSpan.classList.remove("is-hidden");
             setTimeout(() => {
-                quoteFull.classList.add("enlarge");
+                quoteFull.classList.add("is-expanded");
             }, 5)
         } else {
             //collasping
-            quoteFull.classList.remove("enlarge");
-            titleSpan.classList.add("quote-hide");
+            quoteFull.classList.remove("is-expanded");
+            titleSpan.classList.add("is-hidden");
 
             quoteFull.addEventListener("transitionend", () => {
-                quoteFull.classList.add("quote-hide");
-                quoteShort.classList.remove("quote-hide");
+                quoteFull.classList.add("is-hidden");
+                quoteShort.classList.remove("is-hidden");
                 setTimeout(() => {
-                    quoteShort.classList.add("enlarge")
+                    quoteShort.classList.add("is-expanded")
                 }, 5)
             }, { once: true })
             clickToExpand = true;
@@ -69,9 +77,4 @@ function isScrolledIntoView(el) {
     // When top and bottom is between midpoint in screen returns true
     const isVisible = (elemTop <= windowMid && elemBottom >= windowMid);
     return isVisible;
-}
-
-
-function highlightFirstElement() {
-    quoteContainers[0].classList.add("focus");
 }

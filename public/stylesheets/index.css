@@ -1,118 +1,166 @@
+:root {
+    --main-color: #fff1e6;
+}
+
 body {
-    font-family: "Open Sans", sans-serif;
+    font-family: "Lora";
     color: #474747;
 }
 
-.title {
-    margin-top: 5rem;
-    font-family: "Lora";
-    text-align: center;
-    font-size: 35px;
+.landing-wrapper {
+    background-image: url("https://images.unsplash.com/photo-1595405895473-1adb3f68501a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80");
+    background-size:cover;
+    height: 100vh;
 }
 
-.container {
+.landing-wrapper__overlay {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.landing {
     display: flex;
     justify-content: center;
-    flex-direction: column;
-    margin-top: 3rem;
+    align-items: center;
+    height: 100%;
+}
+
+.landing__quote {
+    width: 70%;
+
+    color:white;
+    font-size: 2.2em;
+    line-height: 2.2em;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+
+    animation: appear 0.5s ease-out;
+    opacity: 1;    
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+
+}
+
+.quotes-wrapper {
     font-size: 1.3rem;
 }
 
+.title {
+    text-align: center;
+    font-size: 35px;
 
-.quote-container {
-    display: flex;
-    flex-direction: column;
-    /* text-align: center; */
-    justify-content: center;
-
-    font-family: "Lora";
-    
-    width: 45%;
-    margin: auto;
-    padding: 30px 60px;
-    transition: all 0.7s ease-out;
+    padding-top: 50px;
+    padding-bottom: 70px;
 }
 
-.quote-container:hover {
-    box-shadow: 0 3px 8px rgba(44, 44, 44, 0.35);
-    background-color: #ffe5d9;
-    cursor: pointer;
+.break {
+    width: 20%;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    border: 1px solid rgb(189, 189, 189);
+    opacity: 0.2;
 }
 
-.start-double-quote {
-    font-size: 1.5em;
-    margin-bottom: -10px;
+.break-is-focus {
+    border-color: #ffe7d4;
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
 }
 
 .quote {
-    font-size: 0.8em;
+    display: flex;
+    flex-direction: column;
+    /* text-align: center; */
+    justify-content: center;    
+    width: 45%;
+    margin: auto;
+    padding: 30px 60px;
+    padding-top: 40px;
+
+
+    transition: all 0.7s ease-out;
+    font-size: 17px;
+}
+
+.quote:hover {
+    box-shadow: 0 3px 8px rgba(44, 44, 44, 0.35);
+    background-color: var(--main-color);
+    cursor: pointer;
+}
+
+.quote__singleQuotation {
+    font-size: 1.5em;
+}
+
+.quote__short {
+    max-height: 0;
+    overflow: hidden;
     line-height: 3.0em;
-    /* font-style: italic; */
 }
 
-.quote-author {
-    font-family: "Open Sans";
-    font-weight: bold;
-    font-size: 0.6em;
-
-    text-transform: uppercase;
-
-    letter-spacing: 0.2em;
-    margin-top: 20px;
-}
-
-hr {
-    width: 30%;
-    margin-top: 100px;
-    margin-bottom: 100px;
-}
-
-.quote-hide {
-    display: none;
-}
-
-.quote-full {
+.quote__full {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.8s ease-out;
+    line-height: 3.0em;
 }
 
-.quote-short {
-    max-height: 0;
-    overflow: hidden;
-}
-
-.enlarge {
-    max-height: 1000px;
-    transition: max-height 1.3s ease-out;
-}
-
-.quote-view-more {
+.quote__source {
     font-family: "Open Sans";
-    font-size: 0.6em;
-
+    font-weight: bold;
     text-transform: uppercase;
+    font-size: 0.7em;
+    letter-spacing: 0.2em;
 
-    letter-spacing: 0.1em;
-    margin-top: 30px;
-    
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.quote__pagelink {
     text-decoration: underline;
     color: inherit;
 }
 
-.quote-view-more:hover {
+.quote__pagelink:hover {
     color:#cddafd;
     cursor: pointer;
 }
 
-.focus {
+.is-hidden {
+    display: none;
+}
+
+.is-expanded {
+    max-height: 2000px;
+    transition: max-height 3s ease-out;
+}
+
+.is-focus {
     box-shadow: 0 3px 8px rgba(44, 44, 44, 0.35);
-    background-color: #ffe5d9;
+    background-color: var(--main-color);
+    
 }
 
 @media (max-width: 1000px) {
-    .quote-container {
+    .quote {
         width: 70%;
-        font-size: 1.3rem;
+        font-size: 14px;
+        padding: 20px 30px;
+    }
+
+    .landing-wrapper {
+        font-size: 10px;
     }
 }
