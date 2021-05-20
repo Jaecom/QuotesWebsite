@@ -27,7 +27,8 @@ const clearAndInputSeedData = async () => {
             quoteShort,
             title: quote.title,
             author: quote.author,
-            genre: quote.genre
+            genre: quote.genre,
+            image: quote.image
         });
         await result.save();
     };

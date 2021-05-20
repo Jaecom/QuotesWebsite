@@ -22,6 +22,10 @@ const quoteSchema = new Schema({
         type: [String],
         require: true
     },
+    image: {
+        type: String,
+        require: true
+    }
 })
 
 quoteSchema.virtual('partiallyBoldedQuote').get(function () {

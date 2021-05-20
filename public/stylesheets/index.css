@@ -1,5 +1,5 @@
 :root {
-    --main-color: #fff1e6;
+    --main-color: #ffe7d4;
 }
 
 body {
@@ -8,16 +8,8 @@ body {
 }
 
 .landing-wrapper {
-    background-image: url("https://images.unsplash.com/photo-1595405895473-1adb3f68501a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80");
-    background-size:cover;
     height: 100vh;
-}
-
-.landing-wrapper__overlay {
-    position: absolute;
-    height: 100vh;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: black;
 }
 
 .landing {
@@ -29,12 +21,9 @@ body {
 
 .landing__quote {
     width: 70%;
-
-    color:white;
+    color: white;
     font-size: 2.2em;
     line-height: 2.2em;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
-
     animation: appear 0.5s ease-out;
     opacity: 1;    
 }
@@ -53,7 +42,10 @@ body {
 }
 
 .quotes-wrapper {
-    font-size: 1.3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .title {
@@ -65,32 +57,38 @@ body {
 }
 
 .break {
-    width: 20%;
     margin-top: 100px;
     margin-bottom: 100px;
-    border: 1px solid rgb(189, 189, 189);
-    opacity: 0.2;
+    width: 7px;
+    height: 7px;
+    background-color: var(--main-color);
+    border-radius: 100%;
 }
 
-.break-is-focus {
-    border-color: #ffe7d4;
-    opacity: 1;
-    transition: opacity 0.5s ease-out;
+.quote-container {
+    width: 40vw;
+    font-size: 15px;
+}
+
+.quote-line {
+    height: 40px;
+    width: 1px;
+    background-color: var(--main-color);
+    margin: auto;
+}
+
+.quote-image {
+    width: 100%;
+    height: 40vw;
+    object-fit: cover;
 }
 
 .quote {
-    display: flex;
-    flex-direction: column;
-    /* text-align: center; */
-    justify-content: center;    
-    width: 45%;
     margin: auto;
-    padding: 30px 60px;
+    padding: 30px 50px;
     padding-top: 40px;
-
-
+    border: solid 1px var(--main-color);
     transition: all 0.7s ease-out;
-    font-size: 17px;
 }
 
 .quote:hover {
@@ -150,17 +148,40 @@ body {
 .is-focus {
     box-shadow: 0 3px 8px rgba(44, 44, 44, 0.35);
     background-color: var(--main-color);
-    
+    position: relative;
+}
+
+
+@media (max-width: 1200px) {
+    .quote-container {
+        width: 60vw;
+    }
+
+    .quote-image {
+        height: 60vw;
+    }
 }
 
 @media (max-width: 1000px) {
+    .quote-container {
+        width: 65vw;
+    }
+
+    .quote-image {
+        height: 65vw;
+    }
+ 
     .quote {
-        width: 70%;
-        font-size: 14px;
+        font-size: 13px;
         padding: 20px 30px;
     }
 
     .landing-wrapper {
         font-size: 10px;
+    }
+
+    .square-break {
+        height: 5px;
+        width: 5px;
     }
 }

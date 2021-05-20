@@ -10,14 +10,10 @@ window.addEventListener("scroll", () => {
         const previousEl = quoteContainer.previousElementSibling
         const nextEl = quoteContainer.nextElementSibling
 
-        if (isScrolledIntoView(quoteContainer)) {    
-            previousEl.classList.add("break-is-focus")
-            nextEl.classList.add("break-is-focus")
+        if (isScrolledIntoView(quoteContainer)) {
             quoteContainer.classList.add("is-focus")
         } else {
             if(quoteContainer.classList.contains("is-focus")) {
-                previousEl.classList.remove("break-is-focus")
-                nextEl.classList.remove("break-is-focus")
                 quoteContainer.classList.remove("is-focus")
             }
         }
@@ -72,7 +68,7 @@ function isScrolledIntoView(el) {
     const rect = el.getBoundingClientRect();
     const elemTop = rect.top;
     const elemBottom = rect.bottom;
-    const windowMid = window.innerHeight / 2;
+    const windowMid = window.innerHeight * 1/3;
 
     // When top and bottom is between midpoint in screen returns true
     const isVisible = (elemTop <= windowMid && elemBottom >= windowMid);
