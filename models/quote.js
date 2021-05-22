@@ -1,6 +1,12 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
+const schemaOptions = {
+    toJSON: {
+        virtuals: true
+    }
+};
+
 const quoteSchema = new Schema({
     quoteFull: {
         type: String,
@@ -26,7 +32,7 @@ const quoteSchema = new Schema({
         type: String,
         require: true
     }
-})
+}, schemaOptions)
 
 quoteSchema.virtual('partiallyBoldedQuote').get(function () {
     return this.quoteFull.replace(this.quoteShort, `<b>${this.quoteShort}</b>`);
