@@ -4,7 +4,6 @@ const path = require("path");
 const Quote = require("./models/quote.js")
 const ejsMate = require("ejs-mate");
 
-
 const mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost:27017/quoteWebsite", { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -24,12 +23,19 @@ app.use(express.static('public'));
 
 
 app.get("/", async (req, res) => {
+    //because aggregate is different from Model.find(), need to hydrate model
+    const quotes = await Quote.aggregate([{ $sample: { size: 5 } }])
+        .then(docs => docs.map(doc => Quote.hydrate(doc)));
 
-    //becuase aggregate is different from Model.find(), need to hydrate model
-    const quotes = await Quote.aggregate([{ $sample: { size: 8 } }])
+    const quoteOfDay = await Quote.aggregate([{ $sample: { size: 1 } }])
         .then(docs => docs.map(doc => Quote.hydrate(doc)));
     
-    res.render("quotes/index", { quotes });
+    res.render("quotes/index", { quotes, quoteOfDay});
+});
+
+app.get("/api/quotes", async (req, res) => {
+    const results = await Quote.find({});
+    res.json(results);
 });
 
 
@@ -44,3 +50,4 @@ const port = 3000;
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 })
+
