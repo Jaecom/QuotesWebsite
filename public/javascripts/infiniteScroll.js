@@ -1,49 +1,74 @@
 const quotesWrapper = document.querySelector(".quotes-wrapper");
 
+let pageCount = 2;
+let noFurtherRequest = false;
+
+const host = window.location.protocol + "//" + window.location.host;
+const baseUrl = "/api/quotes";
+let template = null;
+
+//run before 
+(async function () {
+    template = ejs.compile(await fetchTemplateString());
+})();
+
+
 window.onscroll = async function () {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
-        console.log("Bottom reached");
+    if (reachBottom()) {
 
-        const newDiv = document.createElement('div');        
+        if (noFurtherRequest) {
+            return;
+        }
+
         const quotes = await getQuoteData();
-
-        quotes.forEach((quote) => {
-            const html = template({ quote });
-            newDiv.innerHTML += html;
-        })
-
-        addFocusOnScroll(newDiv);
-        addQuoteExpandFold(newDiv);
-        stopClickPropagationAnchors(newDiv);
-        quotesWrapper.insertAdjacentElement("beforeend", newDiv);
+        createElementAndAppend(quotes);
     }
 }
 
 const getQuoteData = async () => {
     try {
-        const res = await fetch("/api/quotes");
+        const urlWithParams = new URL(baseUrl, host);
+        urlWithParams.searchParams.append("page", pageCount++);
+    
+        console.log(urlWithParams);
+
+        const res = await fetch(urlWithParams);
         const data = await res.json();
-        return data;
+
+        console.log(data)
+
+        if (data.lastPage) {
+            noFurtherRequest = true;
+        }
+        return data.quotes;
     } catch (err) {
         console.log("Something went wrong", err);
     }
 }
 
-const template = ejs.compile(`
+const reachBottom = () => {
+    return window.innerHeight + window.scrollY >= document.body.offsetHeight - 150;
+}
 
-    <div class="quote-container">
-    <div class="quote">
-        <p class="quote__singleQuotation">&#8220;</p>
-        <p class="quote__short is-expanded"><%= quote.quoteShort %></p>
-        <p class="quote__full is-hidden"><%- quote.partiallyBoldedQuote %></p>
-        <div class="quote__source">
-            <p><%= quote.author %><span class="quote__title is-hidden">, <%= quote.title %> </span></p>
-            <a href="/<%= quote._id %>" class="quote__pagelink">Read More</a>
-        </div>
-    </div>
-    <div class="quote-line"></div>
-    <img class="quote-image"src="<%= quote.image %> " alt="">
-    </div>
-    <div class="break"></div>
+const createElementAndAppend = (quotes) => {
+    const div = document.createElement('div');
+    quotes.forEach((quote) => {
+        const html = template({ quote });
+        div.innerHTML += html;
+    })
 
-`);
+    addFocusOnScroll(div);
+    addQuoteExpandFold(div);
+    stopClickPropagationAnchors(div);
+    quotesWrapper.insertAdjacentElement("beforeend", div);
+}
+
+async function fetchTemplateString() {
+    try {
+        const res = await fetch("/api/templates/quote");
+        const data = await res.json();
+        return data.html;
+    } catch (err) {
+        console.log("Something went wrong", err);
+    }
+}
