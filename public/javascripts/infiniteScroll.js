@@ -1,11 +1,9 @@
 const quotesWrapper = document.querySelector(".quotes-wrapper");
 
-let pageCount = 2;
-let noFurtherRequest = false;
-
 const host = window.location.protocol + "//" + window.location.host;
 const baseUrl = "/api/quotes";
-let template = null;
+
+let template;
 
 //run before 
 (async function () {
@@ -22,13 +20,15 @@ window.onscroll = async function () {
 
         const quotes = await getQuoteData();
         createElementAndAppend(quotes);
+        history.pushState(null, '', `?page=${nextPageCount}`);
+        nextPageCount++;
     }
 }
 
 const getQuoteData = async () => {
     try {
         const urlWithParams = new URL(baseUrl, host);
-        urlWithParams.searchParams.append("page", pageCount++);
+        urlWithParams.searchParams.append("page", nextPageCount);
     
         console.log(urlWithParams);
 
@@ -40,15 +40,13 @@ const getQuoteData = async () => {
         if (data.lastPage) {
             noFurtherRequest = true;
         }
+        
         return data.quotes;
     } catch (err) {
         console.log("Something went wrong", err);
     }
 }
 
-const reachBottom = () => {
-    return window.innerHeight + window.scrollY >= document.body.offsetHeight - 150;
-}
 
 const createElementAndAppend = (quotes) => {
     const div = document.createElement('div');
@@ -71,4 +69,8 @@ async function fetchTemplateString() {
     } catch (err) {
         console.log("Something went wrong", err);
     }
+}
+
+const reachBottom = () => {
+    return window.innerHeight + window.scrollY >= document.body.offsetHeight - 150;
 }

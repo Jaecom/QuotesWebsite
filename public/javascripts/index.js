@@ -1,17 +1,17 @@
 const addFocusOnScroll = (parent) => {
-    const quoteContainers = parent.querySelectorAll(".quote");
+    const quotes = parent.querySelectorAll(".quote");
     const quoteImages = parent.querySelectorAll(".quote-image");
 
     window.addEventListener("scroll", () => {
-        quoteContainers.forEach((quoteContainer, index) => {
-            if (isScrolledIntoView(quoteContainer)) {
-                quoteContainer.classList.add("is-focus")
+        quotes.forEach((quote, index) => {
+            if (isScrolledIntoView(quote)) {
+                quote.classList.add("is-focus")
                 quoteImages[index].classList.add("is-focus")
             } else {
-                if (quoteContainer.classList.contains("is-focus")) {
-                    quoteContainer.classList.remove("is-focus")
+                if (quote.classList.contains("is-focus")) {
+                    quote.classList.remove("is-focus")
                     quoteImages[index].classList.remove("is-focus")
-                }
+                }   
             }
         });
     });
@@ -28,18 +28,18 @@ const stopClickPropagationAnchors = (parent) => {
 }
 
 const addQuoteExpandFold = (parent) => {
-    const quoteContainers = parent.querySelectorAll(".quote-container");
+    const quotes = parent.querySelectorAll(".quote");
     const quoteFulls = parent.querySelectorAll(".quote__full");
     const quoteShorts = parent.querySelectorAll(".quote__short");
     const quoteTitles = parent.querySelectorAll(".quote__title");
 
-    quoteContainers.forEach((quoteContainer, index) => {
+    quotes.forEach((quote, index) => {
         let clickToExpand = true;
         const quoteFull = quoteFulls[index];
         const quoteShort = quoteShorts[index];
         const titleSpan = quoteTitles[index];
 
-        quoteContainer.addEventListener("click", (event) => {
+        quote.addEventListener("click", (event) => {
             event.stopPropagation();
 
             if (clickToExpand) {
@@ -77,7 +77,7 @@ function isScrolledIntoView(el) {
     const windowMid = window.innerHeight * 1 / 2;
 
     // When top and bottom is between midpoint in screen returns true
-    const isVisible = (elemTop <= windowMid && elemBottom >= windowMid);
+    const isVisible = (elemTop <= windowMid * 1.25 && elemBottom >= windowMid * 0.75);
     return isVisible;
 }
 
