@@ -125,8 +125,6 @@ body {
     line-height: 1.8em;
 
     margin-top: 20px;
-    display: flex;
-    justify-content: space-between;
 }
 
 .quote__pagelink {
@@ -142,10 +140,6 @@ body {
 
 .is-hidden {
     display: none;
-}
-
-.is-expanded {
-    max-height: 1000px;
 }
 
 .is-focus {

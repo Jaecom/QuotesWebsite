@@ -27,53 +27,6 @@ const stopClickPropagationAnchors = (parent) => {
     }
 }
 
-const addQuoteExpandFold = (parent) => {
-    const quotes = parent.querySelectorAll(".quote");
-    const quoteFulls = parent.querySelectorAll("#quote__full");
-    const quoteShorts = parent.querySelectorAll("#quote__short");
-    const quoteTitles = parent.querySelectorAll(".quote__title");
-
-    quotes.forEach((quote, index) => {
-        let clickToExpand = true;
-        const quoteFull = quoteFulls[index];
-        const quoteShort = quoteShorts[index];
-        const titleSpan = quoteTitles[index];
-
-        quote.addEventListener("click", (event) => {
-            event.stopPropagation();
-
-            if (clickToExpand) {
-                //expanding
-                clickToExpand = false;
-                quoteShort.classList.remove("is-expanded");
-
-                quoteShort.addEventListener("transitionend", () => {
-                    titleSpan.classList.remove("is-hidden");
-                    quoteShort.classList.add("is-hidden");
-                    quoteFull.classList.remove("is-hidden");
-                    setTimeout(() => {
-                        quoteFull.classList.add("is-expanded");
-                    }, 5)
-                }, { once: true })    
-            } else {
-                //collasping
-                clickToExpand = true;
-                quoteFull.classList.remove("is-expanded");
-
-                quoteFull.addEventListener("transitionend", () => {
-                    titleSpan.classList.add("is-hidden");
-                    quoteShort.classList.remove("is-hidden");
-                    quoteFull.classList.add("is-hidden");
-                    setTimeout(() => {
-                        quoteShort.classList.add("is-expanded")
-                    }, 5)
-                }, { once: true })
-                
-            }
-        })
-    });
-}
-
 function isScrolledIntoView(el) {
     const rect = el.getBoundingClientRect();
     const elemTop = rect.top;
@@ -87,6 +40,5 @@ function isScrolledIntoView(el) {
 
 
 addFocusOnScroll(document);
-// addQuoteExpandFold(document);
 stopClickPropagationAnchors(document);
 

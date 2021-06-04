@@ -56,7 +56,6 @@ const createElementAndAppend = (quotes) => {
     })
 
     addFocusOnScroll(div);
-    // addQuoteExpandFold(div);
     stopClickPropagationAnchors(div);
     quotesWrapper.insertAdjacentElement("beforeend", div);
 }
