@@ -29,8 +29,8 @@ const stopClickPropagationAnchors = (parent) => {
 
 const addQuoteExpandFold = (parent) => {
     const quotes = parent.querySelectorAll(".quote");
-    const quoteFulls = parent.querySelectorAll(".quote__full");
-    const quoteShorts = parent.querySelectorAll(".quote__short");
+    const quoteFulls = parent.querySelectorAll("#quote__full");
+    const quoteShorts = parent.querySelectorAll("#quote__short");
     const quoteTitles = parent.querySelectorAll(".quote__title");
 
     quotes.forEach((quote, index) => {
@@ -45,26 +45,30 @@ const addQuoteExpandFold = (parent) => {
             if (clickToExpand) {
                 //expanding
                 clickToExpand = false;
-                quoteFull.classList.remove("is-hidden");
-                quoteShort.classList.add("is-hidden");
                 quoteShort.classList.remove("is-expanded");
-                titleSpan.classList.remove("is-hidden");
-                setTimeout(() => {
-                    quoteFull.classList.add("is-expanded");
-                }, 5)
+
+                quoteShort.addEventListener("transitionend", () => {
+                    titleSpan.classList.remove("is-hidden");
+                    quoteShort.classList.add("is-hidden");
+                    quoteFull.classList.remove("is-hidden");
+                    setTimeout(() => {
+                        quoteFull.classList.add("is-expanded");
+                    }, 5)
+                }, { once: true })    
             } else {
                 //collasping
+                clickToExpand = true;
                 quoteFull.classList.remove("is-expanded");
-                titleSpan.classList.add("is-hidden");
 
                 quoteFull.addEventListener("transitionend", () => {
-                    quoteFull.classList.add("is-hidden");
+                    titleSpan.classList.add("is-hidden");
                     quoteShort.classList.remove("is-hidden");
+                    quoteFull.classList.add("is-hidden");
                     setTimeout(() => {
                         quoteShort.classList.add("is-expanded")
                     }, 5)
                 }, { once: true })
-                clickToExpand = true;
+                
             }
         })
     });
@@ -83,6 +87,6 @@ function isScrolledIntoView(el) {
 
 
 addFocusOnScroll(document);
-addQuoteExpandFold(document);
+// addQuoteExpandFold(document);
 stopClickPropagationAnchors(document);
 
