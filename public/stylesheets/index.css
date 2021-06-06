@@ -2,14 +2,18 @@
     --main-color: #ffecd2;
 }
 
+html {
+    font-size: 62.5%;
+}
+
 body {
     font-family: "Lora";
     color: #474747;
 }
 
 .landing-wrapper {
-    height: 100vh;
-    background-image: linear-gradient( 90.5deg,  rgba(255,207,139,0.50) 1.1%, rgba(255,207,139,1) 81.3% );
+    height: 95vh;
+    background-image: linear-gradient(90.5deg,  rgba(255,207,139,0.50) 1.1%, rgba(255,207,139,1) 81.3% );
 }
 
 .landing {
@@ -22,9 +26,9 @@ body {
 .landing__quote {
     width: 70%;
     color: black;
-    font-size: 2.2em;
-    line-height: 2.2em;
-    animation: appear 0.5s ease-out;
+    font-size: 3.5rem;
+    line-height: 7.7rem;
+    animation: appear .5s ease-out;
     opacity: 1;    
 }
 
@@ -45,7 +49,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 50px;
+    padding-top: 5rem;
 }
 
 .quotes-wrapper div:nth-of-type(4n-1) {
@@ -54,26 +58,26 @@ body {
 
 .title {
     text-align: center;
-    font-size: 35px;
+    font-size: 3.5rem;
 
-    padding-top: 50px;
-    padding-bottom: 70px;
+    padding-top: 5rem;
+    padding-bottom: 7rem;
 }
 
 .break {
-    margin-top: 150px;
-    margin-bottom: 150px;
-    width: 7px;
-    height: 7px;
+    margin-top: 15rem;
+    margin-bottom: 15rem;
+    width: .7rem;
+    height: .7rem;
     background-color: var(--main-color);
     border-radius: 100%;
 }
 
 .quote-container {
     width: 75vw;
-    font-size: 15px;
     display: flex;
     flex-direction: row;
+    font-size: 1.6rem;
 }
 
 .quote-line {
@@ -87,16 +91,16 @@ body {
     object-fit: cover;
     width: 40%;
     min-height: 400px;
-    transition: box-shadow 0.7s ease-out;
+    transition: box-shadow .7s ease-out;
 }
 
 .quote {
     width: 50%;
     margin: auto;
-    padding: 30px 50px;
-    padding-top: 40px;
+    padding: 3rem 5rem;
+    padding-top: 4rem;
     border: solid 1px var(--main-color);
-    transition: 0.7s ease-out;
+    transition: .7s ease-out;
     transition-property: box-shadow, background-color;
 }
 
@@ -107,30 +111,30 @@ body {
 }
 
 .quote__singleQuotation {
-    font-size: 1.5em;
+    font-size: 2.4rem;
 }
 
 .quote__text {
     overflow: hidden;
     line-height: 3.0em;
-    transition: max-height 0.6s ease-in-out;
+    transition: max-height .6s ease-in-out;
 }
 
 .quote__info {
     font-family: "Open Sans";
     font-weight: bold;
     text-transform: uppercase;
-    font-size: 0.7em;
-    letter-spacing: 0.2em;
+    font-size: .7em;
+    letter-spacing: .2em;
     line-height: 1.8em;
 
-    margin-top: 20px;
+    margin-top: 2rem;
 }
 
 .quote__pagelink {
     text-decoration: underline;
     color: inherit;
-    margin-left: 50px;
+    margin-left: 5rem;
 }
 
 .quote__pagelink:hover {
@@ -148,6 +152,11 @@ body {
 }
 
 @media (max-width: 1000px) {
+
+    html {
+        font-size: 9px;
+    }
+
     .quotes-wrapper div:nth-of-type(4n-1) {
         flex-direction: column-reverse;
     }
@@ -159,13 +168,11 @@ body {
 
     .quote {
         width: initial;
-        font-size: 13px;
-        padding: 20px 30px;
     }
 
     .quote-line {
         width: 1px;
-        height: 20px;
+        height: 2rem;
     }
  
     .quote-image {
@@ -174,14 +181,9 @@ body {
     }
 
     .break {
-        height: 5px;
-        width: 5px;
-        margin-top: 80px;
-        margin-bottom: 80px;
+        height: .5rem;
+        width: .5rem;
+        margin-top: 8rem;
+        margin-bottom: 8rem;
     }
-
-    .landing-wrapper {
-        font-size: 10px;
-    }
-
 }
