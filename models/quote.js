@@ -34,7 +34,7 @@ const quoteSchema = new Schema({
     }
 }, schemaOptions)
 
-quoteSchema.virtual('partiallyBoldedQuote').get(function () {
+quoteSchema.virtual('boldedQuoteFull').get(function () {
     return this.quoteFull.replace(this.quoteShort, `<b>${this.quoteShort}</b>`);
 });
 
