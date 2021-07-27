@@ -1,48 +1,6 @@
-:root {
-    --main-color: #ffecd2;
-}
-
-html {
-    font-size: 62.5%;
-}
-
 body {
     font-family: "Lora";
     color: #474747;
-}
-
-.landing-wrapper {
-    height: 95vh;
-    background-image: linear-gradient(90.5deg,  rgba(255,207,139,0.50) 1.1%, rgba(255,207,139,1) 81.3% );
-}
-
-.landing {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}
-
-.landing__quote {
-    width: 70%;
-    color: black;
-    font-size: 3.5rem;
-    line-height: 7.7rem;
-    animation: appear .5s ease-out;
-    opacity: 1;    
-}
-
-@keyframes appear {
-    0% {
-        opacity: 0;
-        transform: translateY(50px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateY(0px);
-    }
-
 }
 
 .quotes-wrapper {
@@ -64,95 +22,19 @@ body {
     padding-bottom: 7rem;
 }
 
-.break {
-    margin-top: 15rem;
-    margin-bottom: 15rem;
-    width: .7rem;
-    height: .7rem;
-    background-color: var(--main-color);
-    border-radius: 100%;
-}
+@keyframes appear {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
 
-.quote-container {
-    width: 75vw;
-    display: flex;
-    flex-direction: row;
-    font-size: 1.6rem;
-}
-
-.quote-line {
-    height: 1px;
-    width: 10%;
-    background-color: var(--main-color);
-    margin: auto;
-}
-
-.quote-image {
-    object-fit: cover;
-    width: 40%;
-    min-height: 400px;
-    transition: box-shadow .7s ease-out;
-}
-
-.quote {
-    width: 50%;
-    margin: auto;
-    padding: 3rem 5rem;
-    padding-top: 4rem;
-    border: solid 1px var(--main-color);
-    transition: .7s ease-out;
-    transition-property: box-shadow, background-color;
-}
-
-.quote:hover {
-    box-shadow: 0 3px 8px rgba(44, 44, 44, 0.35);
-    background-color: var(--main-color);
-    cursor: pointer;
-}
-
-.quote__singleQuotation {
-    font-size: 2.4rem;
-}
-
-.quote__text {
-    overflow: hidden;
-    line-height: 3.0em;
-    transition: max-height .6s ease-in-out;
-}
-
-.quote__info {
-    font-family: "Open Sans";
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: .7em;
-    letter-spacing: .2em;
-    line-height: 1.8em;
-
-    margin-top: 2rem;
-}
-
-.quote__pagelink {
-    text-decoration: underline;
-    color: inherit;
-    margin-left: 5rem;
-}
-
-.quote__pagelink:hover {
-    color:#cddafd;
-    cursor: pointer;
-}
-
-.is-hidden {
-    display: none;
-}
-
-.is-focus {
-    box-shadow: 0 3px 8px rgba(44, 44, 44, 0.35);
-    background-color: var(--main-color);
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
 }
 
 @media (max-width: 1000px) {
-
     html {
         font-size: 9px;
     }

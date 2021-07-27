@@ -1,11 +1,5 @@
 <% layout("layouts/boilerplate") -%>
 
-<div class="landing-wrapper">
-    <div class="landing">
-        <h1 class="landing__quote"><%= quoteOfDay[0].quoteShort %> </h1>
-    </div>
-</div>
-
 <div class="quotes-wrapper">
     <h2 class="title">Quotes</h1>
     <% quotes.forEach((quote, index) => { %>
@@ -19,5 +13,5 @@
 </script>
 
 <script src="https://github.com/mde/ejs/releases/download/v3.1.6/ejs.min.js"></script>
-<script src="javascripts/index.js"></script>
+<script src="javascripts/quoteFocus.js"></script>
 <script src="javascripts/infiniteScroll.js"></script>
