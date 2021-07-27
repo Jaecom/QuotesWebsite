@@ -26,7 +26,6 @@ window.addEventListener("scroll",
 )
 
 const getQuoteData = async () => {
-
     try {
         const urlWithParams = new URL(baseUrl, host);
         urlWithParams.searchParams.append("page", nextPageCount);
@@ -48,18 +47,25 @@ const getQuoteData = async () => {
     }
 }
 
-
 const createElementAndAppend = (quotes) => {
-    const div = document.createElement('div');
     quotes.forEach((quote) => {
         const html = template({ quote });
-        div.innerHTML += html;
-    })
+        const elements = createElementFromHtml(html);
+        elements.forEach((element) => {
+            quotesWrapper.insertAdjacentElement("beforeend", element);
 
+        })
+    })
+}
+
+const createElementFromHtml = (htmlString) => {
+    const div = document.createElement('div');
+    div.innerHTML = htmlString.trim();
     addFocusOnScroll(div);
     stopClickPropagationAnchors(div);
-    quotesWrapper.insertAdjacentElement("beforeend", div);
+    return div.childNodes;
 }
+
 
 async function fetchTemplateString() {
     try {
