@@ -34,8 +34,26 @@ const quoteSchema = new Schema({
     }
 }, schemaOptions)
 
-quoteSchema.virtual('boldedQuoteFull').get(function () {
-    return this.quoteFull.replace(this.quoteShort, `<b>${this.quoteShort}</b>`);
+// quoteSchema.virtual('boldedQuoteFull').get(function () {
+//     return this.quoteFull.replace(this.quoteShort, `<b>${this.quoteShort}</b>`);
+// });
+
+quoteSchema.virtual('keywords').get(function() {
+    return extractKeywords(this.quoteShort);
 });
+
+quoteSchema.virtual("quoteExcludeKeywords").get(function () {
+    return extractRest(this.quoteShort);
+});
+
+function extractKeywords(string) {
+    const keywords = string.split(" ").slice(0,3).join(" ");
+    return keywords;
+}
+
+function extractRest(string) {
+    const quote = string.split(" ").slice(3).join(" ");
+    return quote;
+}
 
 module.exports = mongoose.model("Quote", quoteSchema);

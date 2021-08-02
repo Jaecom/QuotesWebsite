@@ -1,0 +1,92 @@
+.header {
+    height: 95vh;
+    padding: 10rem;
+
+    display: grid;
+    grid-template-columns: minmax(min-content, 40rem) minmax(min-content, 40rem);
+    grid-template-areas:   "keyword . "
+                            ". quote "
+                            "author bottom";
+
+    row-gap: 1rem;
+
+    justify-content: center;
+    align-content: center;
+
+    position: relative;
+
+    &__keyword {
+        grid-area: keyword;
+        text-align: right;
+        align-self: flex-end;
+    }
+
+    &__first-words {
+        animation: 1s ease slideInFromRight;
+    }
+
+    &__quotation-mark {
+        margin-right: .5rem;
+    }
+
+    &__quote {
+        grid-area: quote;
+    }
+
+    &__paragraph {
+        // duration | timing-function | delay |
+        // iteration-count | direction | fill-mode | play-state | name */
+        animation: 1s ease .2s slideInFromTop;
+        animation-fill-mode: backwards;
+    }
+    
+    &__author {
+        grid-area: author;
+        align-self: flex-end;
+        text-align: right;
+
+        color: $color-grey-dark;
+        animation: .8s ease .6s slideInFromBottom;
+        animation-fill-mode: backwards;
+        margin-right: 1rem;
+    }
+
+    &__bottom {
+        grid-area: bottom;
+
+        display: flex;
+        justify-content: flex-end;
+
+        border-bottom: solid 1px $color-grey-dark;
+        margin-top: 4rem;
+        animation: .8s ease .6s slideInFromBottom;
+        animation-fill-mode: backwards;
+    }
+
+    &__book {
+        grid-area: author;
+        width: 200%;
+    
+        color: $color-grey-light-2;
+        text-align: left;
+        
+        position: absolute;
+        z-index: -1;
+        bottom: -45%;
+        left: -1%;
+
+        overflow-wrap: break-word;
+        animation: 1s ease 1s fadeIn;
+        animation-fill-mode: backwards;
+    }
+}
+
+
+.vertical-line-break {
+    width: 1px;
+    height: 10rem;
+    background-color: $color-grey-dark;
+    margin-left: 50%;
+    animation: 1s ease .6s slideInFromBottom;
+    animation-fill-mode: backwards;
+}

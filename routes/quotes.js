@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Quote = require("../models/quote");
-const QUOTES_PER_PAGE = 10;
+const QUOTES_PER_PAGE = 9;
 
 router.get('/favicon.ico', (req, res) => res.status(204));
 
@@ -25,8 +25,12 @@ router.get("/", async (req, res) => {
     const quoteOfDay = await Quote.aggregate([{ $sample: { size: 1 } }])
         .then(docs => docs.map(doc => Quote.hydrate(doc)));
 
+    const quotesThree = await Quote.aggregate([{ $sample: { size: 3 } }])
+        .then(docs => docs.map(doc => Quote.hydrate(doc)));
+
     const quotes = await Quote.find({}).limit(QUOTES_PER_PAGE * pagination.page).sort({ _id: -1 });
-    res.render("quotes/index", { quotes, quoteOfDay, pagination });
+    
+    res.render("quotes/index", {quoteOfDay, quotesThree , quotes, pagination });
 });
 
 

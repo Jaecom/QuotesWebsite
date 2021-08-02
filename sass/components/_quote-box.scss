@@ -1,0 +1,102 @@
+$quote-box-side: 28rem;
+
+.quote-box-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax($quote-box-side + 10rem, 1fr));
+    justify-items: center;
+    justify-content: center;
+    padding: 8rem 5rem;
+    row-gap: 10rem;
+}
+
+.quote-box {
+    width: $quote-box-side;
+    display: grid;
+    grid-template-columns: minmax($quote-box-side, 1fr) min-content;
+    grid-template-rows: minmax(min-content, $quote-box-side) min-content;
+    grid-template-areas:    "image book"
+                            "quote quote";
+    row-gap: 1rem;
+
+    &__book {
+        grid-area: book;
+        align-self: flex-end;
+        width: 7rem;
+
+        transform: translateX(-40%);
+        transition: .4s ease;
+        opacity: .5;
+        transition-property: transform, opacity;
+
+        position: relative;
+        z-index: 2;
+    }
+
+    &__book-heading {
+        width: $quote-box-side;
+        height: 4rem;
+
+        word-wrap: break-word;
+        overflow: hidden;
+
+        color: $color-grey-light;
+
+        transform-origin: 0 100%;
+        transform: rotate(-90deg) translateY(100%);
+    
+        transition: .2s ease;
+        transition-property: height, z-index;
+    }
+
+    &__image {
+        grid-area: image;
+        width: 100%;
+        height: 100%;
+        max-height: $quote-box-side;
+
+        object-fit: cover;
+        position: relative;
+        z-index: 1;
+        box-shadow: 0rem 1rem 2rem rgba($color-black, .1);
+        cursor: pointer;
+
+        filter: brightness(.6);
+
+        transition: .5s ease;
+        transition-property: box-shadow, transform, filter;
+        
+        &:hover {
+            box-shadow: 0rem 1rem 2rem rgba($color-black, .3);
+            transform: scale(1.05);
+            filter: brightness(1);
+        }
+
+        &:hover ~ .quote-box__quoteText {
+            transform: translateY(0%) translateX($quote-box-side * -0.05 / 2);
+            opacity: 1;
+        }
+
+        &:hover ~ .quote-box__book {
+            transform: translateX(8%) translateY($quote-box-side * 0.05 / 2);
+            opacity: 1;
+            z-index: 0;
+            opacity: 1;
+        }
+
+        &:hover ~ .quote-box__book .quote-box__book-heading {
+            height: 100%;
+        }
+    }
+
+    &__quoteText {
+        grid-area: quote;
+        opacity: 0;
+        transform: translateY(-50%);
+        transition: .4s ease;
+        transition-property: transform, opacity, width;
+    }
+
+    &__bolded {
+        margin-top: 1rem;
+    }
+}

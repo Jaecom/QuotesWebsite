@@ -1,8 +1,12 @@
 @import "./abstracts/mixins";
 @import "./abstracts/variables";
+@import "./abstracts/animation";
 
 @import "./base/base";
 @import "./base/typography";
 @import "./base/utilities";
 
-@import "./components/quote"
+@import "./layout/header";
+
+@import "./components/quote-box";
+@import "./components/btn";

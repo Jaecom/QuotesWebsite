@@ -1,0 +1,15 @@
+.btn {
+    &:link,
+    &:visited {
+        padding: 1rem 2rem;
+
+        font-family: $font-display;
+        color: $color-white;
+        text-decoration: none;
+        background-color: $color-grey-dark;
+        text-transform: uppercase;
+        letter-spacing: .1em;
+        font-weight: 400;
+        font-size: 1.1rem;
+    }
+}

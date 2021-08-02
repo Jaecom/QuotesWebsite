@@ -1,4 +1,4 @@
-const quotesWrapper = document.querySelector(".quotes-wrapper");
+const container = document.querySelector(".quote-box-container");
 
 const host = window.location.protocol + "//" + window.location.host;
 const baseUrl = "/api/quotes";
@@ -52,8 +52,7 @@ const createElementAndAppend = (quotes) => {
         const html = template({ quote });
         const elements = createElementFromHtml(html);
         elements.forEach((element) => {
-            quotesWrapper.insertAdjacentElement("beforeend", element);
-
+            container.insertAdjacentElement("beforeend", element);
         })
     })
 }

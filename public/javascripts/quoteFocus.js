@@ -1,17 +1,16 @@
 const addFocusOnScroll = (parent) => {
-    const quotes = parent.querySelectorAll(".quote");
-    const quoteImages = parent.querySelectorAll(".quote-image");
+    const quotes = parent.querySelectorAll(".quote-box");
 
     window.addEventListener("scroll", () => {
         quotes.forEach((quote, index) => {
             if (isScrolledIntoView(quote)) {
-                quote.classList.add("is-focus")
-                quoteImages[index].classList.add("is-focus")
+                //do something when quotes comes into view
+                
             } else {
-                if (quote.classList.contains("is-focus")) {
-                    quote.classList.remove("is-focus")
-                    quoteImages[index].classList.remove("is-focus")
-                }   
+                if (quote.classList.contains("shadow")) {
+                //do something when quotes comes out of view
+
+                }
             }
         });
     });
@@ -19,7 +18,6 @@ const addFocusOnScroll = (parent) => {
 
 const stopClickPropagationAnchors = (parent) => {
     const quoteViewAnchors = parent.querySelectorAll(".quote__pagelink");
-    
     for (quoteViewAnchor of quoteViewAnchors) {
         quoteViewAnchor.addEventListener("click", (event) => {
             event.stopPropagation();
@@ -38,7 +36,5 @@ function isScrolledIntoView(el) {
     return isVisible;
 }
 
-
 addFocusOnScroll(document);
 stopClickPropagationAnchors(document);
-
