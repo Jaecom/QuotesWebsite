@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Quote = require("../models/quote");
-const QUOTES_PER_PAGE = 9;
+const QUOTES_PER_PAGE = 10;
 
 router.get('/favicon.ico', (req, res) => res.status(204));
 
@@ -22,15 +22,18 @@ router.get("/", async (req, res) => {
     const pagination = { page, noFurtherRequest }
 
     //because aggregate is different from Model.find(), need to hydrate model
-    const quoteOfDay = await Quote.aggregate([{ $sample: { size: 1 } }])
+    const quoteHeader = await Quote.aggregate([{ $sample: { size: 3 } }])
         .then(docs => docs.map(doc => Quote.hydrate(doc)));
 
-    const quotesThree = await Quote.aggregate([{ $sample: { size: 3 } }])
+    const quoteCarasel = await Quote.aggregate([{ $sample: { size: 3 } }])
+        .then(docs => docs.map(doc => Quote.hydrate(doc)));
+
+    const quotePick = await Quote.aggregate([{ $sample: { size: 20 } }])
         .then(docs => docs.map(doc => Quote.hydrate(doc)));
 
     const quotes = await Quote.find({}).limit(QUOTES_PER_PAGE * pagination.page).sort({ _id: -1 });
     
-    res.render("quotes/index", {quoteOfDay, quotesThree , quotes, pagination });
+    res.render("quotes/index", {quoteHeader, quoteCarasel, quotePick, quotes, pagination });
 });
 
 

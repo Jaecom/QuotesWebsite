@@ -1,28 +1,65 @@
 .header {
-    height: 95vh;
-    padding: 10rem;
+    height: 100vh;
+    grid-column: full-start / full-end;
+    position: relative; 
+    background-color: $color-black;
 
-    display: grid;
-    grid-template-columns: minmax(min-content, 40rem) minmax(min-content, 40rem);
-    grid-template-areas:   "keyword . "
-                            ". quote "
-                            "author bottom";
+    &__bg-wrapper {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        position: absolute;
+        filter: brightness(40%) grayscale(20%);
+    }
 
-    row-gap: 1rem;
+    &__bg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
 
-    justify-content: center;
-    align-content: center;
+        z-index: 1;
+        opacity: 0;
+        transform: scale(1);
+        transition: all .7s ease-out;
 
-    position: relative;
+        &--front {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+    }
+
+    &__grid {
+        height: 100%;
+        color: white;
+
+        display: grid;
+        grid-template-columns: repeat(2, 35rem);
+        grid-template-areas:   "keyword topleft "
+                                ". quote "
+                                "author bottom";
+        row-gap: 3rem;
+        column-gap: 2rem;
+    
+        justify-content: center;
+        align-content: center;
+        position: relative;
+        z-index: 3;
+
+        transition: opacity 1s ease-out;
+    }
 
     &__keyword {
         grid-area: keyword;
         text-align: right;
-        align-self: flex-end;
-    }
+        margin-left: 20%;
 
-    &__first-words {
-        animation: 1s ease slideInFromRight;
+        position: relative;
+
+        transition: transform .6s, opacity .6s ease-in;
+
+        animation: 1s ease .4s slideInFromRight;
+        animation-fill-mode: backwards;
     }
 
     &__quotation-mark {
@@ -31,62 +68,174 @@
 
     &__quote {
         grid-area: quote;
-    }
+        color: rgba(white, .8);
 
-    &__paragraph {
+        transition: transform .6s, opacity .6s ease-in;
         // duration | timing-function | delay |
         // iteration-count | direction | fill-mode | play-state | name */
-        animation: 1s ease .2s slideInFromTop;
+        animation: .8s ease .8s slideInFromBottom;
         animation-fill-mode: backwards;
     }
-    
-    &__author {
+
+    &__bottomLeft {
         grid-area: author;
+        position: relative;
+    }
+
+    &__author {
         align-self: flex-end;
         text-align: right;
+        color: rgba($color-grey-dark, .5);
 
-        color: $color-grey-dark;
-        animation: .8s ease .6s slideInFromBottom;
+        margin-bottom: -1%;
+        transition: transform .6s, opacity .6s ease-in;
+
+        animation: .8s ease 1.2s slideInFromBottom;
         animation-fill-mode: backwards;
-        margin-right: 1rem;
     }
 
-    &__bottom {
+    &__label {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        font-weight: 300;
+        color: rgba($color-white, .3);
+
+        transform-origin: 0 100%;
+        transform: rotate(-90deg) translateY(100%);
+        
+        animation: .8s ease 1.5s fadeIn;
+        animation-fill-mode: backwards;
+    }
+
+    &__bottomRight {
         grid-area: bottom;
 
         display: flex;
         justify-content: flex-end;
 
-        border-bottom: solid 1px $color-grey-dark;
-        margin-top: 4rem;
-        animation: .8s ease .6s slideInFromBottom;
+        border-bottom: solid 1px rgba($color-grey-dark, .2);
+        animation: .6s ease 1.2s slideInFromRight;
         animation-fill-mode: backwards;
     }
 
     &__book {
-        grid-area: author;
-        width: 200%;
-    
-        color: $color-grey-light-2;
+        width: 70%;
+
         text-align: left;
+        color: rgba($color-grey-light, .15);
+        font-family: $font-display;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 10rem;
+        line-height: 1;
+        word-wrap: break-word;
         
         position: absolute;
-        z-index: -1;
-        bottom: -45%;
+        bottom: -2%;
         left: -1%;
 
+        z-index: 2;
+
+        transition: transform .6s, opacity .6s ease-in;
+
         overflow-wrap: break-word;
-        animation: 1s ease 1s fadeIn;
+        animation: 1s ease 1.5s fadeIn;
         animation-fill-mode: backwards;
+    }
+
+    &__topRight {
+        grid-area: topleft;
+        border-left: solid 1px rgba($color-grey-dark, .2);
+
+        position: relative;
+
+        animation: .6s ease fadeIn;
+        animation-fill-mode: backwards;
+    }
+
+    &__square {
+        width: 1.5rem;
+        height: 1.5rem;
+
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: rgba($color-grey-light, .2);
+
+        transition: transform .6s, opacity .6s ease-in;
+    } 
+
+    &__circle {
+        width: 30rem;
+        height: 30rem;
+        border-radius: 50%;
+
+        background-color: rgba($color-grey-light, .1);
+
+        position: absolute;
+        top: -60%;
+        left: -25%;
+        z-index: -1;
+
+        transition: transform .6s, opacity .6s ease-in;
     }
 }
 
+.header-text-hide {
+    opacity: 0;
+}
 
-.vertical-line-break {
-    width: 1px;
-    height: 10rem;
-    background-color: $color-grey-dark;
-    margin-left: 50%;
-    animation: 1s ease .6s slideInFromBottom;
-    animation-fill-mode: backwards;
+.header-slide-left {
+    transform: translateX(50%);
+    opacity: 0;
+}
+
+.header-slide-right {
+    transform: translateX(-20%);
+    opacity: 0;
+}
+
+.header-slide-bottom {
+    transform: translateY(50%);
+    opacity: 0;
+}
+
+.header-nav {
+    position: absolute;
+    bottom: 4rem;
+    right: 4rem;
+    display: flex;
+    z-index: 4;
+
+    &__item {
+        list-style: none;
+        width: 6rem;
+        height: 6rem;
+        box-shadow: 0rem .5rem 1rem rgba($color-black, .5);
+        cursor: pointer;
+        opacity: .35;
+
+        transition: opacity .8s, border .8s, transform .2s ease-out;
+
+        &:not(:last-of-type) {
+            margin-right: 1.5rem;
+        }
+
+        &--selected {
+            opacity: 1;
+            border: solid .5px white;
+        }
+
+        &:hover {
+            transform: translateY(-.5rem);
+        }
+    }
+
+    &__thumb {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 }

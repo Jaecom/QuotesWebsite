@@ -34,11 +34,19 @@ const quoteSchema = new Schema({
     }
 }, schemaOptions)
 
-// quoteSchema.virtual('boldedQuoteFull').get(function () {
-//     return this.quoteFull.replace(this.quoteShort, `<b>${this.quoteShort}</b>`);
-// });
+quoteSchema.virtual("imageThumb").get(function() {
+    return this.image.replace(/&w=\d{1,}/, "&h=100");
+})
 
-quoteSchema.virtual('keywords').get(function() {
+quoteSchema.virtual("imageMedium").get(function() {
+    return this.image.replace(/&w=\d{1,}/, "&h=500");
+})
+
+quoteSchema.virtual("imageBig").get(function() {
+    return this.image.replace(/&w=\d{1,}/, "&w=1500");
+})
+
+quoteSchema.virtual("keywords").get(function() {
     return extractKeywords(this.quoteShort);
 });
 
