@@ -1,10 +1,12 @@
 <div class="quote-box">
-    <img src="<%=quote.image%>" alt="" class="quote-box__image">
+    <div class="quote-box__image-container">
+        <img src="<%=quote.image%>" alt="" class="quote-box__image">
+    </div>
     <div class="quote-box__book">
         <h3 class="heading-3 quote-box__book-heading"><%= quote.title %></h3>
     </div>
     <div class="quote-box__quoteText">
-        <h4 class="heading-4 quote-box__bolded"><%= quote.keywords %></h4>
+        <h4 class="heading-4"><%= quote.keywords %></h4>
         <p class="paragraph--medium"><%= quote.quoteExcludeKeywords %>&rdquo;</p>
     </div>
 </div>
