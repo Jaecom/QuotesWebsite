@@ -1,29 +1,20 @@
-$quote-box-side: 28rem;
+$quote-box-side: 25rem;
 
-.quote-box-container {
+.quote-card {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax($quote-box-side + 10rem, 1fr));
-    justify-items: center;
-    justify-content: center;
-    padding: 8rem 5rem;
-    row-gap: 10rem;
-}
-
-.quote-box {
-    width: $quote-box-side;
-    display: grid;
+    max-width: $quote-box-side;
     grid-template-columns: minmax($quote-box-side, 1fr) min-content;
     grid-template-rows: minmax(min-content, $quote-box-side) min-content;
     grid-template-areas:    "image book"
                             "quote quote";
-    row-gap: 1rem;
+    row-gap: 1.5rem;
 
     &__book {
         grid-area: book;
         align-self: flex-end;
         width: 7rem;
 
-        transform: translateX(-40%);
+        transform: translateX(-35%);
         transition: .4s ease;
         opacity: .5;
         transition-property: transform, opacity;
@@ -34,7 +25,8 @@ $quote-box-side: 28rem;
 
     &__book-heading {
         width: $quote-box-side;
-        height: 4rem;
+        height: 3rem;
+        text-transform: uppercase;
 
         word-wrap: break-word;
         overflow: hidden;
@@ -49,18 +41,24 @@ $quote-box-side: 28rem;
     }
 
     &__image {
-        grid-area: image;
         width: 100%;
         height: 100%;
-        max-height: $quote-box-side;
-
         object-fit: cover;
+
+        filter: brightness(.6);
+
+        transition: .7s ease;
+        transition-property: transform, filter;
+    }
+
+    &__image-container {
+        grid-area: image;
+        overflow: hidden;
         position: relative;
+        max-height: $quote-box-side;
         z-index: 1;
         box-shadow: 0rem 1rem 2rem rgba($color-black, .1);
         cursor: pointer;
-
-        filter: brightness(.6);
 
         transition: .5s ease;
         transition-property: box-shadow, transform, filter;
@@ -68,22 +66,26 @@ $quote-box-side: 28rem;
         &:hover {
             box-shadow: 0rem 1rem 2rem rgba($color-black, .3);
             transform: scale(1.05);
+        }
+
+        &:hover .quote-card__image {
+            transform: scale(1.07);
             filter: brightness(1);
         }
 
-        &:hover ~ .quote-box__quoteText {
-            transform: translateY(0%) translateX($quote-box-side * -0.05 / 2);
+        &:hover ~ .quote-card__quoteText {
+            transform: translateY(0%) translateX($quote-box-side * -.05 * .5);
             opacity: 1;
         }
 
-        &:hover ~ .quote-box__book {
-            transform: translateX(8%) translateY($quote-box-side * 0.05 / 2);
+        &:hover ~ .quote-card__book {
+            transform: translateX(8%) translateY($quote-box-side * .05 * .5);
             opacity: 1;
             z-index: 0;
             opacity: 1;
         }
 
-        &:hover ~ .quote-box__book .quote-box__book-heading {
+        &:hover ~ .quote-card__book .quote-card__book-heading {
             height: 100%;
         }
     }
@@ -93,10 +95,16 @@ $quote-box-side: 28rem;
         opacity: 0;
         transform: translateY(-50%);
         transition: .4s ease;
-        transition-property: transform, opacity, width;
+        width: 95%;
+        transition-property: transform, opacity;
     }
 
-    &__bolded {
-        margin-top: 1rem;
+    &__paragraph {
+        margin-top: -.3rem;
+    }
+
+    &__bold {
+        font-size: 2rem;
+        font-weight: 700;
     }
 }
