@@ -1,3 +1,7 @@
+@mixin header-elements-transition {
+    transition: transform .6s, opacity .6s ease-in;
+}
+
 .header {
     height: 100vh;
     grid-column: full-start / full-end;
@@ -45,8 +49,6 @@
         align-content: center;
         position: relative;
         z-index: 3;
-
-        transition: opacity 1s ease-out;
     }
 
     &__keyword {
@@ -56,7 +58,7 @@
 
         position: relative;
 
-        transition: transform .6s, opacity .6s ease-in;
+        @include header-elements-transition;
 
         animation: 1s ease .4s slideInFromRight;
         animation-fill-mode: backwards;
@@ -70,7 +72,7 @@
         grid-area: quote;
         color: rgba(white, .8);
 
-        transition: transform .6s, opacity .6s ease-in;
+        @include header-elements-transition;
         // duration | timing-function | delay |
         // iteration-count | direction | fill-mode | play-state | name */
         animation: .8s ease .8s slideInFromBottom;
@@ -88,7 +90,7 @@
         color: rgba($color-grey-dark, .5);
 
         margin-bottom: -1%;
-        transition: transform .6s, opacity .6s ease-in;
+        @include header-elements-transition;
 
         animation: .8s ease 1.2s slideInFromBottom;
         animation-fill-mode: backwards;
@@ -105,6 +107,8 @@
         transform-origin: 0 100%;
         transform: rotate(-90deg) translateY(100%);
         
+        @include header-elements-transition;
+
         animation: .8s ease 1.5s fadeIn;
         animation-fill-mode: backwards;
     }
@@ -138,7 +142,7 @@
 
         z-index: 2;
 
-        transition: transform .6s, opacity .6s ease-in;
+        @include header-elements-transition;
 
         overflow-wrap: break-word;
         animation: 1s ease 1.5s fadeIn;
@@ -164,7 +168,7 @@
         right: 0;
         background-color: rgba($color-grey-light, .2);
 
-        transition: transform .6s, opacity .6s ease-in;
+        @include header-elements-transition;
     } 
 
     &__circle {
@@ -178,13 +182,9 @@
         top: -60%;
         left: -25%;
         z-index: -1;
-
-        transition: transform .6s, opacity .6s ease-in;
+        
+        @include header-elements-transition;
     }
-}
-
-.header-text-hide {
-    opacity: 0;
 }
 
 .header-slide-left {
@@ -201,6 +201,12 @@
     transform: translateY(50%);
     opacity: 0;
 }
+
+.header-slide-label {
+    transform: rotate(-90deg) translateY(100%) translateX(50%);
+    opacity: 0;
+}
+
 
 .header-nav {
     position: absolute;

@@ -7,9 +7,12 @@
 @import "./base/utilities";
 
 @import "./layout/header";
-@import "./layout/todays-pick";
-@import "./layout/pick";
+@import "./layout/card-carasel";
+@import "./layout/quote-select";
 
-@import "./components/quote-box";
+@import "./components/card";
 @import "./components/btn";
 @import "./components/break";
+
+@import "./pages/index";
+

@@ -9,6 +9,7 @@ const author = header.querySelector(".header__author");
 const book = header.querySelector(".header__book");
 const circle = header.querySelector(".header__circle");
 const square = header.querySelector(".header__square");
+const label = header.querySelector(".header__label");
 
 let currentNavItem = header.querySelector(".header-nav__item--selected");
 let currentImage = header.querySelector(".header__bg--front");
@@ -26,6 +27,7 @@ navItems.forEach((item, index) => {
         domTransition(book, quote.title, "header-slide-bottom");
         domTransition(circle, null, "header-slide-left");
         domTransition(square, null, "header-slide-left");
+        domTransition(label, null, "header-slide-label");
     })
 });
 
