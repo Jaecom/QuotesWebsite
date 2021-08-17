@@ -6,34 +6,43 @@ const QUOTES_PER_PAGE = 10;
 router.get('/favicon.ico', (req, res) => res.status(204));
 
 router.get("/", async (req, res) => {
+    //because aggregate is different from Model.find(), need to hydrate model
+    const quoteHeader = await Quote.aggregate([
+        { $sample: { size: 5 } }
+    ]).then(docs => docs.map(doc => Quote.hydrate(doc)));
+
+    const quoteCarasel = await Quote.aggregate([
+        { $match: { "quoteShort": /^.{0,200}$/ } },
+        { $sample: { size: 3 } }
+    ]).then(docs => docs.map(doc => Quote.hydrate(doc)));
+
+    const quotePick = await Quote.aggregate([
+        { $sample: { size: 20 } }
+    ]).then(docs => docs.map(doc => Quote.hydrate(doc)));
+    res.render("quotes/home", { quoteHeader, quoteCarasel, quotePick });
+});
+
+router.get("/index", async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     const dataSize = await Quote.countDocuments({});
     let noFurtherRequest = false;
 
     if ((page - 1) * QUOTES_PER_PAGE > dataSize) {
         const maxPageNumber = Math.ceil(dataSize / QUOTES_PER_PAGE);
-        res.redirect(`/?page=${maxPageNumber}`);
+        res.redirect(`/index?page=${maxPageNumber}`);
     }
 
     if (page * QUOTES_PER_PAGE > dataSize) {
         noFurtherRequest = true;
     }
 
-    const pagination = { page, noFurtherRequest }
+    const pagination = { page, noFurtherRequest, quoteCount: QUOTES_PER_PAGE }
 
-    //because aggregate is different from Model.find(), need to hydrate model
-    const quoteHeader = await Quote.aggregate([{ $sample: { size: 3 } }])
-        .then(docs => docs.map(doc => Quote.hydrate(doc)));
+    const quotes = await Quote.find({})
+        .limit(QUOTES_PER_PAGE * pagination.page)
+        .sort({ _id: -1 });
 
-    const quoteCarasel = await Quote.aggregate([{ $sample: { size: 3 } }])
-        .then(docs => docs.map(doc => Quote.hydrate(doc)));
-
-    const quotePick = await Quote.aggregate([{ $sample: { size: 20 } }])
-        .then(docs => docs.map(doc => Quote.hydrate(doc)));
-
-    const quotes = await Quote.find({}).limit(QUOTES_PER_PAGE * pagination.page).sort({ _id: -1 });
-    
-    res.render("quotes/index", {quoteHeader, quoteCarasel, quotePick, quotes, pagination });
+    res.render("quotes/index", { quotes, pagination })
 });
 
 
@@ -45,4 +54,4 @@ router.get("/:id", async (req, res) => {
 });
 
 
-module.exports = router; 
+module.exports = router;

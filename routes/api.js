@@ -1,33 +1,33 @@
 const express = require("express");
 const router = express.Router();
 const Quote = require("../models/quote");
-const QUOTES_PER_PAGE = 10;
 const fs = require('fs');
 const path = require("path");
 
 router.get("/quotes", async (req, res) => {
     const { page } = req.query;
+    const quoteCount = parseInt(req.query.quoteCount);
 
     const quotes = await Quote.find({})
-        .skip(QUOTES_PER_PAGE * (page - 1)).limit(QUOTES_PER_PAGE);
+        .skip(quoteCount * (page - 1)).limit(quoteCount);
         
-    const data = buildDataObject(quotes);
+    const data = buildDataObject(quotes, quoteCount);
 
     res.json(data);
 });
 
 router.get("/templates/quote", (req, res) => {
     const html = fs.readFileSync(path.join(__dirname, '../views/templates/quote.ejs'));
-    res.json({ html: html.toString() });
+    res.json({ html: html.toString()});
 });
 
-const buildDataObject = (quotes) => {
+const buildDataObject = (quotes, quoteCount) => {
     const newObject = {};
 
     newObject.quotes = quotes;
 
     //creating flag for last Page
-    if (quotes.length < QUOTES_PER_PAGE) {
+    if (quotes.length !== quoteCount) {
         newObject.lastPage = true;
     }
     return newObject;

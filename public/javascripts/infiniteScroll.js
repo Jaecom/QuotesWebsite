@@ -1,9 +1,12 @@
-const container = document.querySelector(".quote-box-container");
+const container = document.querySelector(".quote-index-container");
 
 const host = window.location.protocol + "//" + window.location.host;
 const baseUrl = "/api/quotes";
 
 let template;
+let nextPageCount = pagination.page ;
+let noFurtherRequest = pagination.noFurtherRequest;
+const quoteCount = pagination.quoteCount;
 
 //run before 
 (async function () {
@@ -29,6 +32,7 @@ const getQuoteData = async () => {
     try {
         const urlWithParams = new URL(baseUrl, host);
         urlWithParams.searchParams.append("page", nextPageCount);
+        urlWithParams.searchParams.append("quoteCount", quoteCount);
     
         console.log(urlWithParams);
 
@@ -60,8 +64,8 @@ const createElementAndAppend = (quotes) => {
 const createElementFromHtml = (htmlString) => {
     const div = document.createElement('div');
     div.innerHTML = htmlString.trim();
-    addFocusOnScroll(div);
-    stopClickPropagationAnchors(div);
+    // addFocusOnScroll(div);
+    // stopClickPropagationAnchors(div);
     return div.childNodes;
 }
 
