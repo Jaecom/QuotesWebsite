@@ -1,10 +1,12 @@
-const selectQuote = document.querySelector(".select__quote");
-const selectTitle = document.querySelector(".select__title");
-const pick = document.querySelector(".select__pick");
+const selectQuote = document.querySelector(".quote-select__quote");
+const selectTitle = document.querySelector(".quote-select__title");
+const pick = document.querySelector(".quote-select__pick");
+const display = document.querySelector(".quote-select__display");
 
-const authorSpans = pick.querySelectorAll(".select__span");
+const authorSpans = pick.querySelectorAll(".quote-select__span");
 let currentAuthor = null;
 
+setInterval(selectRandomAuthor, 5 * 1000);
 selectRandomAuthor();
 
 authorSpans.forEach((element, index) => {
@@ -23,15 +25,19 @@ function selectRandomAuthor() {
 
 function selectAuthor(element) {
     if(currentAuthor !== null) {
-        currentAuthor.classList.remove("select__span--selected");
+        currentAuthor.classList.remove("quote-select__span--selected");
     }
 
-    element.classList.add("select__span--selected")
+    element.classList.add("quote-select__span--selected")
     currentAuthor = element;
 }
 
 function updateQuote(index) {
-    selectQuote.textContent = quotePick[index].quoteShort;
-    selectTitle.textContent = quotePick[index].title;
+    display.addEventListener("transitionend", () => {
+        selectQuote.textContent = quotePick[index].quoteShort;
+        selectTitle.textContent = quotePick[index].title;
+        display.classList.remove("quote-select--hide");
+    });
+    display.classList.add("quote-select--hide");
 }
 

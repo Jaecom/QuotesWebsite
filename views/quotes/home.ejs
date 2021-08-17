@@ -1,0 +1,82 @@
+<% layout("layouts/boilerplate") -%>
+
+<main class="container">
+    <section class="header"> 
+        <div class="header__bg-wrapper">
+            <% quoteHeader.forEach((quote, index) => { %>
+                <img class="header__bg <%= (index === 0) ? "header__bg--front": "" %>" src="<%= quote.imageBig %>" alt="Background image <%= index + 1 %>" >
+            <% }) %> 
+        </div>
+        <div class="header__grid">
+            <h1 class="header__keyword heading-1"><span class="header__quotation-mark">&ldquo;</span><%= quoteHeader[0].keywords %></h1>
+            <p class="header__quote paragraph--medium"><%= quoteHeader[0].quoteExcludeKeywords %>&rdquo;</p>
+            <div class="header__bottomLeft">
+                <h3 class="header__author heading-4"><%= quoteHeader[0].author %></h3>
+                <h2 class="header__label heading-3">Quote of Day</h2>
+            </div>
+            <div class="header__bottomRight"></div>
+            <div class="header__topRight">
+                <div class="header__circle"></div>
+                <div class="header__square"></div>
+            </div>
+            <div class="header__book"><%= quoteHeader[0].title %></div>
+        </div>
+        <ul class="header-nav">
+            <% quoteHeader.forEach((quote, index) => { %>
+            <li class="header-nav__item <%= (index === 0) ? "header-nav__item--selected": "" %>">
+                <img src="<%= quote.imageThumb %>" alt="" class="header-nav__thumb">
+            </li>  
+            <% }) %>
+        </ul>
+    </section>
+
+    <section class="card-carasel">
+        <h3 class="card-carasel__heading heading-3">Cards</h3>
+        <div class="card-carasel__container">
+            <%  quoteCarasel.forEach((quote, index) => { %>
+            <div class="card">
+                <div class="card__side card__side--front">
+                    <img src="<%=quote.imageMedium%>" alt="Quote card image <%= index + 1 %>" class="card__image">
+                    <h2 class="card__book"><%= quote.title %></h2>
+                </div>
+                <div class="card__side card__side--back">
+                    <div class="card__text">
+                        <p class="paragraph--small">&ldquo;<%= quote.quoteShort %>&rdquo;</p>
+                    </div>
+                </div>
+            </div>
+            <%  }) %>
+        </div>
+        <a href="/index" class="btn">
+            View More
+        </a>
+    </section>
+    
+    <section class="quote-select">
+        <div class="quote-select__grid">
+            <div class="quote-select__display">
+                <p class="quote-select__quotation">&ldquo;</p>
+                <p class="quote-select__quote paragraph--big"></p>
+                <h4 class="quote-select__title heading-4"></h4>
+            </div>
+            <div class="quote-select__line"></div>
+            <div class="quote-select__pick">
+                <p class="quote-select__option">
+                    <% for(quote of quotePick) { %>
+                        <span class="quote-select__span"><%= quote.author %></span>
+                    <% } %>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="full-page"></div>
+</main>
+    
+<script>
+    const quoteHeader = <%- JSON.stringify(quoteHeader) %>;
+    const quotePick = <%- JSON.stringify(quotePick) %>;
+</script>
+
+<script src="javascripts/header-nav.js"></script>
+<script src="javascripts/select-quote.js"></script>

@@ -1,0 +1,21 @@
+.card-carasel {
+    grid-column: center-start / center-end;
+    padding: 20rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card-carasel__heading {
+    text-align: center;
+    margin-bottom: 5rem;
+}
+
+.card-carasel__container {
+    grid-column: center-start / center-end;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax($quote-card-side, 1fr));
+    justify-content: space-between;
+    gap: 5rem;
+    margin-bottom: 4rem;
+}

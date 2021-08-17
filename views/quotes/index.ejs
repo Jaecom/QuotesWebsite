@@ -1,97 +1,14 @@
 <% layout("layouts/boilerplate") -%>
 
-<main class="container">
-    <section class="header"> 
-        <div class="header__bg-wrapper">
-            <% quoteHeader.forEach((quote, index) => { %>
-                <img class="header__bg <%= (index === 0) ? "header__bg--front": "" %>" src="<%= quote.imageBig %>" alt="" >
-            <% }) %> 
-        </div>
-        <div class="header__grid">
-            <h1 class="header__keyword heading-1"><span class="header__quotation-mark">&ldquo;</span><%= quoteHeader[0].keywords %></h1>
-            <p class="header__quote paragraph--medium"><%= quoteHeader[0].quoteExcludeKeywords %>&rdquo;</p>
-            <div class="header__bottomLeft">
-                <h3 class="header__author heading-4"><%= quoteHeader[0].author %></h3>
-                <h2 class="header__label heading-3">Quote of Day</h2>
-            </div>
-            <div class="header__bottomRight"></div>
-            <div class="header__topRight">
-                <div class="header__circle"></div>
-                <div class="header__square"></div>
-            </div>
-            <div class="header__book"><%= quoteHeader[0].title %></div>
-        </div>
-        <ul class="header-nav">
-            <% quoteHeader.forEach((quote, index) => { %>
-            <li class="header-nav__item <%= (index === 0) ? "header-nav__item--selected": "" %>">
-                <img src="<%= quote.imageThumb %>" alt="" class="header-nav__thumb">
-            </li>  
-            <% }) %>
-        </ul>
-    </section>
+<section class="quote-index-container">
+    <%  quotes.forEach((quote, index) => { %>
+        <%- include("../templates/quote", { quote })%>
+    <%  }) %>
+</section>
 
-    <section class="section-todays-pick">
-        <h3 class="quote-cards__heading heading-3">Today's Pick</h3>
-        <div class="quote-carasel-container">
-            <%  quoteCarasel.forEach((quote, index) => { %>
-            <div class="quote-card">
-                <div class="quote-card__image-container">
-                    <img src="<%=quote.imageMedium%>" alt="" class="quote-card__image">
-                </div>
-                <div class="quote-card__book">
-                    <h2 class="quote-card__book-heading heading-2 "><%= quote.title %></h2>
-                </div>
-                <div class="quote-card__quoteText">
-                    <p class="quote-card__bold paragraph--small"><%= quote.keywords %></p>
-                    <p class="quote-card__paragraph paragraph--small"><%= quote.quoteExcludeKeywords %>&rdquo;</p>
-                </div>
-            </div>
-            <%  }) %>
-        </div>
-    </section>
-    
-    <section class="select">
-        <div class="select__grid">
-            <div class="select__display">
-                <p class="select__quotation paragraph--big">&ldquo;</p>
-                <p class="select__quote paragraph--big"></p>
-                <h4 class="select__title heading-4">The Great Gatsby</h4>
-            </div>
-            
-            <div class="select__pick">
-                <p class="select__option">
-                    <% for(quote of quotePick) { %>
-                        <span class="select__span"><%= quote.author %></span>
-                    <% } %>
-                </p>
-            </div>
-        </div>
-    </section>
-    
-    <div class="full-page" style="background-color: black;"></div>
-
-
-
-
-
-
-    <!-- <section class="quote-box-container">
-        <%  //quotes.forEach((quote, index) => { %>
-            <%- //include("../templates/quote", { quote })%>
-        <%  //}) %>
-    </section> -->
-
-</main>
-    
 <script>
-    let nextPageCount = <%= ++pagination.page %>;
-    let noFurtherRequest = <%= pagination.noFurtherRequest %>;
-    const quoteHeader = <%- JSON.stringify(quoteHeader) %>;
-    const quotePick = <%- JSON.stringify(quotePick) %>;
+    const pagination = <%- JSON.stringify(pagination) %>;
 </script>
 
 <script src="https://github.com/mde/ejs/releases/download/v3.1.6/ejs.min.js"></script>
-<script src="javascripts/header-nav.js"></script>
-<script src="javascripts/select-quote.js"></script>
-<!-- <script src="javascripts/quoteFocus.js"></script>
-<script src="javascripts/infiniteScroll.js"></script> -->
+<script src="javascripts/infiniteScroll.js"></script>

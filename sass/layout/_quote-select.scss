@@ -1,0 +1,87 @@
+.quote-select {
+    grid-column: full-start / full-end;
+    @include grid;
+    background-color: $color-grey-light;
+    height: 60rem;
+    
+    &__grid {
+        grid-column: col-start 1 / col-end 10;
+        display: grid;
+        grid-template-rows: 1fr min-content min-content;
+        
+        justify-items: center;
+        align-items: center;
+        
+        text-align: center;
+
+        margin-bottom: 2rem;
+    }
+
+    &__display {
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        row-gap: 1rem;
+        
+        position: relative;
+
+        transition: all .7s ease;
+    }
+
+    &__line {
+        background-color: $color-grey-dark;
+        width: 1px;
+    }
+
+    &__pick {
+        display: flex;
+        align-items: flex-end;
+    }
+
+    &__heading {
+        grid-column: 1 / -1;
+        text-align: center;
+    }
+
+    &__option {
+        color: rgba($color-grey-dark, .3);
+        font-family: $font-display;
+        font-size: 1.6rem;
+        font-weight: 700;
+        line-height: 2;
+    }
+
+    &__span {
+        cursor: pointer;
+        word-break: break-all;
+
+        &--selected {
+            color: $color-black;
+            transform: scale(1.2);
+            transition: all 1.5s ease-in;
+        }
+    }
+
+    &__quotation {
+        position: absolute;
+        top: -20%;
+        left: 50%;
+        transform: translatex(-50%);
+        font-size: 10rem;
+        font-weight: 700;
+        color: rgba($color-grey-dark, .4);
+    }
+
+    &__quote {
+        z-index: 1;
+    }
+
+    &__title {
+        font-style: italic;
+        opacity: .8;
+    }
+
+    &--hide {
+        opacity: 0;
+    }
+}
