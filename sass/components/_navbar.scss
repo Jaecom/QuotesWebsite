@@ -1,0 +1,62 @@
+.nav {
+	height: 5rem;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	padding: 0 5rem;
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 100;
+
+	color: white;
+
+	transition: transform 0.5s ease;
+
+	&--hide {
+		transform: translateY(-100%);
+	}
+
+	&--background {
+		background-color: rgba($color-black, 0.5);
+	}
+
+	&__logo {
+	}
+
+	&__searchbar {
+		width: 30rem;
+		height: 2rem;
+	}
+
+	&__search {
+		width: 100%;
+		height: 100%;
+		background-color: rgba($color-grey-light, 0.2);
+		border: none;
+		// color: white;
+	}
+
+	&__list {
+		display: flex;
+	}
+
+	&__item {
+		list-style: none;
+
+		&:not(:last-of-type) {
+			margin-right: 2rem;
+		}
+	}
+
+	&__link {
+		&:link,
+		&:visited {
+			text-decoration: none;
+			color: inherit;
+		}
+	}
+}
