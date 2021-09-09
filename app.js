@@ -1,10 +1,12 @@
 let localDb = false;
 
 if (process.env.NODE_ENV !== "production") {
-    //if not built by heroku(when in development) 
-    //will use .env file to load variables to process.env
+    //development
 	require("dotenv").config();
 	localDb = true;
+} else {
+	//production
+	console.log = function(){};
 }
 
 const express = require("express");
