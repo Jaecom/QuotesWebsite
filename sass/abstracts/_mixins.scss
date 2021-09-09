@@ -1,8 +1,8 @@
 @mixin grid {
-    display: grid;
-    grid-template-columns: [full-start] minmax(10rem, 1fr) [center-start] 
-                            repeat(10, [col-start] minmax(min-content, 10rem) [col-end]) 
-                            [center-end] minmax(10rem, 1fr) [full-end];
-    overflow: hidden;
-    position: relative;
+	display: grid;
+	grid-template-columns:
+		[full-start] minmax(10rem, 1fr) [center-start]
+		repeat(10, [col-start] minmax(min-content, 10rem) [col-end])
+		[center-end] minmax(10rem, 1fr) [full-end];
+	position: relative;
 }

@@ -2,59 +2,72 @@ $font-display: "Montserrat", sans-serif;
 $font-serif: "Libre Baskerville", serif;
 
 %display {
-    font-family: $font-display;
-    color: $color-black;
+	font-family: $font-display;
+	color: $color-black;
 }
 
 .heading-1 {
-    font-family: $font-serif;
-    font-size: 4rem;
-    font-weight: 700;
-    line-height: 1.5;
+	font-family: $font-serif;
+	font-size: 4rem;
+	font-weight: 700;
+	line-height: 1.5;
 }
 
 .heading-2 {
-    @extend %display;
-    font-size: 3rem;
+	@extend %display;
+	font-size: 3rem;
 
-    letter-spacing: .05em;   
-    line-height: 1;
+	letter-spacing: 0.05em;
+	line-height: 1;
+}
+
+.heading-2--cap {
+	@extend %display;
+	text-transform: uppercase;
+	font-weight: 700;
+	font-size: 3.5rem;
+	line-height: 1;
 }
 
 .heading-3 {
-    @extend %display;
-    text-transform: uppercase;
-    font-size: 1.4rem;
-    
-    font-weight: 500;
-    letter-spacing: .1em;
+	@extend %display;
+	text-transform: uppercase;
+	font-size: 1.4rem;
+
+	font-weight: 500;
+	letter-spacing: 0.1em;
 }
 
 .heading-4 {
-    @extend %display;
-    font-size: 1.6rem;
-    line-height: 1.3;
-    font-weight: 400;
+	@extend %display;
+	font-size: 1.6rem;
+	line-height: 1.3;
+	font-weight: 400;
 }
 
+.nav-text {
+	@extend %display;
+	font-size: 1.4rem;
+}
 
 %paragraph {
-    font-family: $font-serif;
-    line-height: 2;
-    font-weight: 400;
+	font-family: $font-serif;
+	line-height: 2;
+	font-weight: 400;
 }
 
 .paragraph--big {
-    @extend %paragraph;;
-    font-size: 2.2rem;
+	@extend %paragraph;
+	font-size: 2.2rem;
+	line-height: 2.3;
 }
 
 .paragraph--medium {
-    @extend %paragraph;;
-    font-size: 1.7rem;
+	@extend %paragraph;
+	font-size: 1.7rem;
 }
 
 .paragraph--small {
-    @extend %paragraph;
-    font-size: 1.5rem;
+	@extend %paragraph;
+	font-size: 1.5rem;
 }

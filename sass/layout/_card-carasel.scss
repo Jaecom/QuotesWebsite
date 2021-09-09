@@ -1,21 +1,36 @@
 .card-carasel {
-    grid-column: center-start / center-end;
-    padding: 20rem 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
+	grid-column: center-start / center-end;
+	padding: 15rem 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 
-.card-carasel__heading {
-    text-align: center;
-    margin-bottom: 5rem;
-}
+	&__display {
+		display: flex;
+	}
 
-.card-carasel__container {
-    grid-column: center-start / center-end;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax($quote-card-side, 1fr));
-    justify-content: space-between;
-    gap: 5rem;
-    margin-bottom: 4rem;
+	&__heading {
+		text-align: center;
+		margin-bottom: 5rem;
+	}
+
+	&__buttons {
+		display: flex;
+		justify-content: center;
+	}
+
+	&__button {
+		&:not(:last-of-type) {
+			margin-right: 2rem;
+		}
+	}
+
+	&__container {
+		grid-column: center-start / center-end;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax($quote-card-side, 1fr));
+		justify-content: space-between;
+		gap: 5rem;
+		margin-bottom: 4rem;
+	}
 }

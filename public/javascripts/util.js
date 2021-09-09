@@ -18,7 +18,7 @@ export function isScrolledIntoView(el, full = false) {
     const windowMid = window.innerHeight * 1 / 2;
 
     if(full) {
-        const isVisible = (elemTop <= windowMid * 1.25 && elemBottom >= windowMid * 0.75);
+        const isVisible = (elemTop <= windowMid * .5 && elemBottom >= windowMid);
         return isVisible;
     } else {
         // When top and bottom is between midpoint in screen returns true

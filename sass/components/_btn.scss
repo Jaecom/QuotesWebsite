@@ -1,15 +1,20 @@
 .btn {
-    &:link,
-    &:visited {
-        padding: 1rem 2rem;
+	&:link,
+	&:visited {
+		align-self: center;
+		font-family: $font-display;
+		text-decoration: none;
+		color: $color-black;
+		font-weight: 400;
+		font-size: 1.3rem;
+		padding: 1rem 2rem;
+		border: solid 1px $color-black;
+		transition: all ease 0.2s;
+		display: inline-block;
+	}
 
-        font-family: $font-display;
-        color: $color-white;
-        text-decoration: none;
-        background-color: $color-grey-dark;
-        text-transform: uppercase;
-        letter-spacing: .1em;
-        font-weight: 400;
-        font-size: 1.1rem;
-    }
+	&:hover {
+		background-color: $color-black;
+		color: white;
+	}
 }

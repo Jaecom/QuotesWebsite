@@ -1,0 +1,7 @@
+.short-display {
+	grid-column: full-start / full-end;
+	@include grid;
+	row-gap: 15rem;
+	padding-bottom: 15rem;
+	overflow: hidden;
+}

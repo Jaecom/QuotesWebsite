@@ -1,98 +1,84 @@
+import { throttle } from "./util.js";
+
 const container = document.querySelector(".quote-index-container");
 
-const host = window.location.protocol + "//" + window.location.host;
-const baseUrl = "/api/quotes";
+const base = window.location.protocol + "//" + window.location.host;
+const currentUrl = "/api/quotes";
+
+const params = new URL(document.location).searchParams;
 
 let template;
-let nextPageCount = pagination.page ;
-let noFurtherRequest = pagination.noFurtherRequest;
-const quoteCount = pagination.quoteCount;
+let nextPage = (parseInt(params.get("page")) || 1) + 1;
+let pageLoaded = true;
 
-//run before 
+//fetch template string from
 (async function () {
-    template = ejs.compile(await fetchTemplateString());
+	template = ejs.compile(await fetchTemplateString());
 })();
 
-window.addEventListener("scroll", 
-    throttle(async function () {
-        if (reachBottom()) {
-            if (noFurtherRequest) {
-                return;
-            }
+window.addEventListener(
+	"scroll",
+	throttle(async function () {
+		if (reachBottom() && furtherRequest && pageLoaded) {
+			pageLoaded = false;
 
-            const quotes = await getQuoteData();
-            createElementAndAppend(quotes);
-            history.pushState(null, '', `?page=${nextPageCount}`);
-            nextPageCount++;
-        }
-    }, 70)
-)
+			const quotes = await getQuoteData();
+			appendElements(quotes);
+			history.pushState(null, "", `?page=${nextPage++}`);
+
+			pageLoaded = true;
+		}
+	}, 70)
+);
 
 const getQuoteData = async () => {
-    try {
-        const urlWithParams = new URL(baseUrl, host);
-        urlWithParams.searchParams.append("page", nextPageCount);
-        urlWithParams.searchParams.append("quoteCount", quoteCount);
-    
-        console.log(urlWithParams);
+	try {
+		const url = new URL(currentUrl, base);
+		url.searchParams.append("page", nextPage);
+		
+		const res = await fetch(url);
+		const data = await res.json();
 
-        const res = await fetch(urlWithParams);
-        const data = await res.json();
+		console.log(data);
 
-        console.log(data)
+		if (data.lastPage) {
+			furtherRequest = false;
+		}
 
-        if (data.lastPage) {
-            noFurtherRequest = true;
-        }
-        
-        return data.quotes;
-    } catch (err) {
-        console.log("Something went wrong", err);
-    }
-}
+		return data.quotes;
+	} catch (err) {
+		console.log("Something went wrong", err);
+	}
+};
 
-const createElementAndAppend = (quotes) => {
-    quotes.forEach((quote) => {
-        const html = template({ quote });
-        const elements = createElementFromHtml(html);
-        elements.forEach((element) => {
-            container.insertAdjacentElement("beforeend", element);
-        })
-    })
-}
+const appendElements = (quotes) => {
+	quotes.forEach((quote) => {
+		const html = template({ quote });
+		const elements = createElements(html);
+		elements.forEach((element) => {
+			container.insertAdjacentElement("beforeend", element);
+		});
+	});
+};
 
-const createElementFromHtml = (htmlString) => {
-    const div = document.createElement('div');
-    div.innerHTML = htmlString.trim();
-    // addFocusOnScroll(div);
-    // stopClickPropagationAnchors(div);
-    return div.childNodes;
-}
-
+const createElements = (htmlString) => {
+	const div = document.createElement("div");
+	div.innerHTML = htmlString.trim();
+	return div.childNodes;
+};
 
 async function fetchTemplateString() {
-    try {
-        const res = await fetch("/api/templates/quote");
-        const data = await res.json();
-        return data.html;
-    } catch (err) {
-        console.log("Something went wrong", err);
-    }
+	try {
+		const res = await fetch("/api/templates/quote");
+		const data = await res.json();
+		return data.html;
+	} catch (err) {
+		console.log("Something went wrong", err);
+	}
 }
 
 const reachBottom = () => {
-    return window.innerHeight + window.scrollY >= document.body.offsetHeight - 500;
-}
-
-function throttle (callback, limit) {
-    let waiting = false;                      // Initially, we're not waiting
-    return function () {                      // We return a throttled function
-        if (!waiting) {                       // If we're not waiting
-            callback.apply(this, arguments);  // Execute users function
-            waiting = true;                   // Prevent future invocations
-            setTimeout(function () {          // After a period of time
-                waiting = false;              // And allow future invocations
-            }, limit);
-        }
-    }
-}
+	return (
+		window.innerHeight + window.scrollY >= document.body.offsetHeight - 500
+	);
+};

@@ -1,0 +1,81 @@
+@mixin segment-elements-transition {
+	transition: all 0.7s ease;
+}
+
+.segment {
+	display: grid;
+	grid-column: col-start 3 / col-end 8;
+	grid-template-columns: 1fr 2fr;
+	grid-template-rows: min-content 1fr;
+	grid-template-areas:
+		"quote quote"
+		"author title";
+
+	gap: 3rem;
+	position: relative;
+
+	&--transform {
+		.segment__quote {
+			// opacity: 0;
+			transform: translateX(-30%);
+		}
+
+		.segment__square {
+			// opacity: 0;
+			transform: translateX(-20%) translateY(60%) scale(0.8);
+		}
+
+		.segment__author {
+			// opacity: 0;
+			transform: translateY(10rem);
+		}
+
+		.segment__title {
+			// opacity: 0;
+			transform: translateX(80%);
+		}
+	}
+
+	&__quote {
+		grid-area: quote;
+		padding-top: 5rem;
+		position: relative;
+		width: 90%;
+		@include segment-elements-transition;
+	}
+
+	&__quotation {
+		margin-bottom: -1rem;
+	}
+
+	&__square {
+		width: 60%;
+		height: 70%;
+		position: absolute;
+		top: 0;
+		right: 0;
+		background-color: $color-grey-light;
+		z-index: -1;
+		@include segment-elements-transition;
+	}
+
+	&__author {
+		grid-area: author;
+		align-self: flex-end;
+		@include segment-elements-transition;
+	}
+
+	&__title {
+		justify-self: flex-end;
+		width: 80%;
+		grid-area: title;
+		text-align: right;
+		color: rgba($color-grey-light, 1);
+		@include segment-elements-transition;
+	}
+
+	&__button {
+		grid-column: col-start 5 / col-end 6;
+		justify-self: center;
+	}
+}

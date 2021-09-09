@@ -1,28 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="stylesheets/style.css" />
+	</head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="stylesheets/style.css">
-
-</head>
-
-<body>
-    <nav class="nav">
-        <a class="nav__logo nav__link nav-text" href="/">QuotesPlease</a>
-        
-        <ol class="nav__list">
-            <li class="nav__item"><a class="nav__link nav-text" href="/index">Cards</a></li>
-            <li class="nav__item"><a class="nav__link nav-text" href="">Explore</a></li>
-            <li class="nav__item"><a class="nav__link nav-text" href="">Login</a></li>
-        </ol>
-    </nav>
-    <%- body -%>
-    <script src="javascripts/nav.js"></script>
-</body>
-
+	<body>
+		<%- include("../partials/navbar.ejs") %>
+        <%- body -%>
+		<script src="javascripts/nav.js"></script>
+	</body>
 </html>

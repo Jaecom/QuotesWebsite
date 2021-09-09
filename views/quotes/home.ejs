@@ -11,7 +11,7 @@
             <h1 class="header__keyword heading-1"><span class="header__quotation-mark">&ldquo;</span><%= quoteHeader[0].keywords %></h1>
             <p class="header__quote paragraph--medium"><%= quoteHeader[0].quoteExcludeKeywords %>&rdquo;</p>
             <div class="header__bottomLeft">
-                <h3 class="header__author heading-4"><%= quoteHeader[0].author %></h3>
+                <h4 class="header__author heading-4"><%= quoteHeader[0].author %></h4>
                 <h2 class="header__label heading-3">Quote of Day</h2>
             </div>
             <div class="header__bottomRight"></div>
@@ -37,7 +37,7 @@
             <div class="card">
                 <div class="card__side card__side--front">
                     <img src="<%=quote.imageMedium%>" alt="Quote card image <%= index + 1 %>" class="card__image">
-                    <h2 class="card__book"><%= quote.title %></h2>
+                    <h2 class="card__book heading-2--cap"><%= quote.title %></h2>
                 </div>
                 <div class="card__side card__side--back">
                     <div class="card__text">
@@ -47,30 +47,45 @@
             </div>
             <%  }) %>
         </div>
-        <a href="/index" class="btn">
-            View More
+        <a href="/index" class="btn card-carasel__button">
+            View All
         </a>
+    </section>
+
+    <section class="short-display">
+        <div class="break-vertical"></div>
+        <div class="segment">
+            <div class="segment__square"></div>
+            <div class="segment__quote">
+                <p class="segment__quotation paragraph--big">&ldquo;</p>
+                <p class="paragraph--big"><%- quotePick[0].quoteShort %></p>
+            </div>
+            <p class="segment__author heading-4"><%- quotePick[0].author %></p>
+            <p class="segment__title heading-2--cap"><%- quotePick[0].title %></p>
+        </div>
+        <!-- <a href="" class="btn segment__button">Construct</a> -->
+        <div class="break-horizontal"></div>
     </section>
     
     <section class="quote-select">
+        <div class="quote-select__background">
+            <img src="" alt="" class="quote-select__image quote-select__image--back">
+            <img src="" alt="" class="quote-select__image quote-select__image--front">
+            <h2 class="quote-select__title heading-2--cap"></h2>
+        </div>
         <div class="quote-select__grid">
             <div class="quote-select__display">
-                <p class="quote-select__quotation">&ldquo;</p>
-                <p class="quote-select__quote paragraph--big"></p>
-                <h4 class="quote-select__title heading-4"></h4>
+                <div class="quote-select__content">
+                    <p class="quote-select__paragraph paragraph--medium">&ldquo;<span class="quote-select__quote"></span>&rdquo;</p>
+                </div>
             </div>
-            <div class="quote-select__line"></div>
             <div class="quote-select__pick">
-                <p class="quote-select__option">
-                    <% for(quote of quotePick) { %>
-                        <span class="quote-select__span"><%= quote.author %></span>
-                    <% } %>
-                </p>
+                <% for(quote of quotePick) { %>
+                <h4 class="quote-select__author heading-4"><%= quote.author %></h4>
+                <% } %>
             </div>
         </div>
     </section>
-
-    <div class="full-page"></div>
 </main>
     
 <script>
@@ -78,5 +93,7 @@
     const quotePick = <%- JSON.stringify(quotePick) %>;
 </script>
 
-<script src="javascripts/header-nav.js"></script>
-<script src="javascripts/select-quote.js"></script>
+<script src="javascripts/header-nav.js" type="module"></script>
+<script src="javascripts/select-quote.js" type="module"></script>
+<script src="javascripts/homeScrollIntoView.js" type="module"></script>
+<script src="javascripts/segment.js" type="module"></script>
