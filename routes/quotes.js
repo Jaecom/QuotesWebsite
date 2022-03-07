@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
 	);
 
 	const quoteCarasel = await Quote.aggregate([
-		{ $match: { "quote.text": /^.{0,200}$/ } },
+		{ $match: { "text.short": /^.{0,200}$/ } },
 		{ $sample: { size: 3 } },
 	]).then((docs) => docs.map((doc) => Quote.hydrate(doc)));
 
