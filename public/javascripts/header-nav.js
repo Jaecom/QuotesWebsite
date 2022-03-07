@@ -26,9 +26,9 @@ function updateHeaderText(index) {
 	const quote = quoteHeader[index];
 
 	domTransition(headerGrid, "header__grid--transform", () => {
-		keywords.textContent = quote.keywords;
-		quoteText.textContent = quote.quoteExcludeKeywords;
-		author.textContent = quote.author;
+		keywords.textContent = quote.text.keywords;
+		quoteText.textContent = quote.text.noKeywords;
+		author.textContent = quote.author.name;
 		book.textContent = quote.title;
 	});
 }

@@ -4,14 +4,14 @@
     <section class="header"> 
         <div class="header__bg-wrapper">
             <% quoteHeader.forEach((quote, index) => { %>
-                <img class="header__bg <%= (index === 0) ? "header__bg--front": "" %>" src="<%= quote.imageBig %>" alt="Background image <%= index + 1 %>" >
+                <img class="header__bg <%= (index === 0) ? "header__bg--front": "" %>" src="<%= quote.image.original %>" alt="Background image <%= index + 1 %>" >
             <% }) %> 
         </div>
         <div class="header__grid">
-            <h1 class="header__keyword heading-1"><span class="header__quotation-mark">&ldquo;</span><%= quoteHeader[0].keywords %></h1>
-            <p class="header__quote paragraph--medium"><%= quoteHeader[0].quoteExcludeKeywords %>&rdquo;</p>
+            <h1 class="header__keyword heading-1"><span class="header__quotation-mark">&ldquo;</span><%= quoteHeader[0].text.keywords %></h1>
+            <p class="header__quote paragraph--medium"><%= quoteHeader[0].text.noKeywords %>&rdquo;</p>
             <div class="header__bottomLeft">
-                <h4 class="header__author heading-4"><%= quoteHeader[0].author %></h4>
+                <h4 class="header__author heading-4"><%= quoteHeader[0].author.name %></h4>
                 <h2 class="header__label heading-3">Quote of Day</h2>
             </div>
             <div class="header__bottomRight"></div>
@@ -24,7 +24,7 @@
         <ul class="header-nav">
             <% quoteHeader.forEach((quote, index) => { %>
             <li class="header-nav__item <%= (index === 0) ? "header-nav__item--selected": "" %>">
-                <img src="<%= quote.imageThumb %>" alt="" class="header-nav__thumb">
+                <img src="<%= quote.image.thumbnail %>" alt="" class="header-nav__thumb">
             </li>  
             <% }) %>
         </ul>
@@ -36,12 +36,12 @@
             <%  quoteCarasel.forEach((quote, index) => { %>
             <div class="card">
                 <div class="card__side card__side--front">
-                    <img src="<%=quote.imageMedium%>" alt="Quote card image <%= index + 1 %>" class="card__image">
+                    <img src="<%=quote.image.medium%>" alt="Quote card image <%= index + 1 %>" class="card__image">
                     <h2 class="card__book heading-2--cap"><%= quote.title %></h2>
                 </div>
                 <div class="card__side card__side--back">
                     <div class="card__text">
-                        <p class="paragraph--small">&ldquo;<%= quote.quoteShort %>&rdquo;</p>
+                        <p class="paragraph--small">&ldquo;<%= quote.text.short %>&rdquo;</p>
                     </div>
                 </div>
             </div>
@@ -58,9 +58,9 @@
             <div class="segment__square"></div>
             <div class="segment__quote">
                 <p class="segment__quotation paragraph--big">&ldquo;</p>
-                <p class="paragraph--big"><%- quotePick[0].quoteShort %></p>
+                <p class="paragraph--big"><%- quotePick[0].text.short %></p>
             </div>
-            <p class="segment__author heading-4"><%- quotePick[0].author %></p>
+            <p class="segment__author heading-4"><%- quotePick[0].author.name %></p>
             <p class="segment__title heading-2--cap"><%- quotePick[0].title %></p>
         </div>
         <!-- <a href="" class="btn segment__button">Construct</a> -->
@@ -81,7 +81,7 @@
             </div>
             <div class="quote-select__pick">
                 <% for(quote of quotePick) { %>
-                <h4 class="quote-select__author heading-4"><%= quote.author %></h4>
+                <h4 class="quote-select__author heading-4"><%= quote.author.name %></h4>
                 <% } %>
             </div>
         </div>

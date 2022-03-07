@@ -1,11 +1,11 @@
 <div class="card">
-    <div class="card__side card__side--front">
-        <img src="<%=quote.imageMedium%>" alt="" class="card__image">
-        <h2 class="card__book heading-2--cap"><%= quote.title %></h2>
-    </div>
-    <div class="card__side card__side--back">
-        <div class="card__text">
-            <p class="paragraph--small">&ldquo;<%= quote.quoteShort %>&rdquo;</p>
-        </div>
-    </div>
+	<div class="card__side card__side--front">
+		<img src="<%=quote.image.medium%>" alt="" class="card__image" />
+		<h2 class="card__book heading-2--cap"><%= quote.title %></h2>
+	</div>
+	<div class="card__side card__side--back">
+		<div class="card__text">
+			<p class="paragraph--small">&ldquo;<%= quote.text.short %>&rdquo;</p>
+		</div>
+	</div>
 </div>

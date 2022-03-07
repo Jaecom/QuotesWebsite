@@ -33,7 +33,7 @@ window.addEventListener("scroll", () => {
 
 authorSpans.forEach((element, index) => {
 	element.addEventListener("mouseover", () => {
-		resetInterval()
+		resetInterval();
 		loadImage(index);
 		selectAuthor(index);
 		updateQuote(index);
@@ -80,7 +80,7 @@ function selectAuthor(index) {
 
 function updateQuote(index) {
 	domTransition(content, "quote-select--hide", () => {
-		selectQuote.textContent = quotePick[index].quoteShort;
+		selectQuote.textContent = quotePick[index].text.short;
 		selectTitle.textContent = quotePick[index].title;
 	});
 }
@@ -97,7 +97,7 @@ function loadImage(index) {
 		swapImage(this.src);
 	};
 
-	newImg.src = quotePick[index].imageMedium;
+	newImg.src = quotePick[index].image.medium;
 }
 
 function swapImage(newImage) {
