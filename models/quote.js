@@ -9,17 +9,16 @@ const schemaOptions = {
 
 const quoteSchema = new Schema(
 	{
-		quoteFull: {
-			type: String,
-			required: true,
-		},
-		quoteShort: {
-			type: String,
-			required: true,
+		text: {
+			raw: String,
+			full: String,
+			short: String,
+			keywords: String,
+			noKeywords: String,
+			preview: String,
 		},
 		author: {
-			type: String,
-			required: true,
+			name: String
 		},
 		title: {
 			type: String,
@@ -28,47 +27,36 @@ const quoteSchema = new Schema(
 		genre: {
 			type: [String],
 			require: true,
+			default: [],
+		},
+		createdDate: {
+			type: Date,
+			default: Date.now(),
 		},
 		image: {
-			type: String,
-			require: true,
+			original: String,
+			medium: String,
+			thumbnail: String,
+		},
+		likes: {
+			users: {
+				type: [String],
+				required: true,
+				default: [],
+			},
+			total: {
+				type: Number,
+				required: true,
+				default: 0,
+			},
+		},
+		owner: String,
+		views: {
+			type: Number,
+			default: 0,
 		},
 	},
 	schemaOptions
 );
-
-quoteSchema.virtual("quoteBolded").get(function () {
-	return this.quoteFull.replace(this.quoteShort, "<b>" + this.quoteShort + "</b>");
-});
-
-quoteSchema.virtual("imageThumb").get(function () {
-	return this.image.replace(/&w=\d{1,}/, "&h=100");
-});
-
-quoteSchema.virtual("imageMedium").get(function () {
-	return this.image.replace(/&w=\d{1,}/, "&h=700");
-});
-
-quoteSchema.virtual("imageBig").get(function () {
-	return this.image.replace(/&w=\d{1,}/, "&w=1500");
-});
-
-quoteSchema.virtual("keywords").get(function () {
-	return extractKeywords(this.quoteShort);
-});
-
-quoteSchema.virtual("quoteExcludeKeywords").get(function () {
-	return extractRest(this.quoteShort);
-});
-
-function extractKeywords(string) {
-	const keywords = string.split(" ").slice(0, 3).join(" ");
-	return keywords;
-}
-
-function extractRest(string) {
-	const quote = string.split(" ").slice(3).join(" ");
-	return quote;
-}
 
 module.exports = mongoose.model("Quote", quoteSchema);
